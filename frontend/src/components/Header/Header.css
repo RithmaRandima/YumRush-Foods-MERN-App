@@ -1,0 +1,17 @@
+.header {
+  height: 34vw;
+  margin: 30px auto;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.447), rgba(0, 0, 0, 0.466)),
+    url("../../assets/burger.jpg");
+  background-size: cover;
+  position: relative;
+}
+
+.header h2 {
+  font-size: max(4.5vw, 22px);
+}
+
+.header-contents {
+  animation: fadeIn 3s;
+}
