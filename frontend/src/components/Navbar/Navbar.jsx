@@ -52,7 +52,7 @@ const Navbar = ({ setShowLogin }) => {
             <FaShoppingBag />
           </Link>
           {/* dot icon */}
-          {getTotalCartAmount() == 0 ? (
+          {!getTotalCartAmount() == 0 ? (
             <div className="absolute min-w-2.5 min-h-2.5 bg-red-400 rounded-full -top-2 -right-2"></div>
           ) : (
             <></>

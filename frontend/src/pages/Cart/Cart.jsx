@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./Cart.css";
 import { StoreContext } from "../../context/StoreContext";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const {
@@ -11,6 +12,8 @@ const Cart = () => {
     food_list,
     getTotalCartAmount,
   } = useContext(StoreContext);
+
+  const navigate = useNavigate();
   return (
     <div className="cart mt-25">
       <div className="cart-items ">
@@ -76,7 +79,10 @@ const Cart = () => {
               <p>{getTotalCartAmount() + 2}</p>
             </div>
           </div>
-          <button className="text-white bg-red-400 w-full rounded-full py-4 ">
+          <button
+            className="text-white bg-red-400 w-full rounded-full py-4 "
+            onClick={() => navigate("/order")}
+          >
             PRECEED TO CHECKOUT
           </button>
         </div>
