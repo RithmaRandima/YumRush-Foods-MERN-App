@@ -1,0 +1,9 @@
+.total-details {
+  display: flex;
+  justify-content: space-between;
+  color: #555;
+}
+
+hr {
+  margin: 10px 0;
+}

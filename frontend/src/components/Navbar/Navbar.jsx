@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Navbar.css";
 import { FaSearch, FaShoppingBag } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { StoreContext } from "../../context/StoreContext";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
+  const { getTotalCartAmount } = useContext(StoreContext);
   return (
     <div className="navbar">
       {/* logo */}
@@ -50,7 +52,11 @@ const Navbar = ({ setShowLogin }) => {
             <FaShoppingBag />
           </Link>
           {/* dot icon */}
-          <div className="absolute min-w-2.5 min-h-2.5 bg-red-400 rounded-full -top-2 -right-2"></div>
+          {getTotalCartAmount() == 0 ? (
+            <div className="absolute min-w-2.5 min-h-2.5 bg-red-400 rounded-full -top-2 -right-2"></div>
+          ) : (
+            <></>
+          )}
         </div>
         <button
           className="bg-transparent text-[16px] cont-[#4955u7e] border border-red-400 px-5 py-2 text-red-300  cursor-pointer rounded-full hover:bg-red-400 duration-200"
