@@ -37,6 +37,14 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
+  // delivery fee
+  const getDeliveryFee = (cartAmount) => {
+    const fixRate = 3;
+    let deliveryCharge = fixRate + cartAmount * 0.05;
+
+    return deliveryCharge;
+  };
+
   // context values
   const contextValue = {
     food_list,
@@ -45,6 +53,7 @@ const StoreContextProvider = (props) => {
     addToCart,
     removeFromCart,
     getTotalCartAmount,
+    getDeliveryFee,
   };
   return (
     <StoreContext.Provider value={contextValue}>

@@ -1,13 +1,29 @@
 @import "tailwindcss";
-/* use outfit font */
+
+.btn {
+  @apply bg-transparent text-white font-extralight uppercase tracking-[3px] border border-amber-300 py-3 px-8 mt-2 shadow
+  hover:bg-amber-300 hover:text-black transition;
+}
+
+.btn-mini {
+  @apply bg-transparent text-white font-extralight uppercase tracking-[2px] border border-amber-300 py-1.5 px-3 shadow text-[10px]
+  hover:bg-amber-300
+  hover:text-black
+    hover:font-semibold
+    duration-150
+   transition;
+}
 
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  font-family: "Outfit", sans-serif;
 }
 
 body {
   min-height: 100vh;
+  background-color: #0f0f0f;
+  overflow-x: hidden;
 }
 
 a {
@@ -17,7 +33,7 @@ a {
 }
 
 .app {
-  width: 80%;
+  /* width: 80%; */
   margin: auto;
 }
 

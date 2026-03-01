@@ -11,6 +11,7 @@ const Cart = () => {
     removeFromCart,
     food_list,
     getTotalCartAmount,
+    getDeliveryFee,
   } = useContext(StoreContext);
 
   const navigate = useNavigate();
@@ -38,9 +39,9 @@ const Cart = () => {
                     className="w-30 h-20 object-cover"
                   />
                   <p>{item.name}</p>
-                  <p>${item.price}</p>
+                  <p>${item.price.toFixed(2)}</p>
                   <p>{cartItems[item._id]}</p>
-                  <p>{item.price * cartItems[item._id]}</p>
+                  <p>${(item.price * cartItems[item._id]).toFixed(2)}</p>
                   <div className="flex">
                     <button onClick={() => removeFromCart(item._id)}>
                       <FaMinus />
@@ -65,18 +66,24 @@ const Cart = () => {
           <h2>Cart total</h2>
           <div>
             <div className="total-details">
-              <p>Sutotal</p>
-              <p>{getTotalCartAmount()}</p>
+              <p>Subtotal</p>
+              <p>${getTotalCartAmount().toFixed(2)}</p>
             </div>
             <hr />
             <div className="total-details">
               <p>Devivery Fee</p>
-              <p>{2}</p>
+
+              <p>${getDeliveryFee(getTotalCartAmount()).toFixed(2)}</p>
             </div>
             <hr />
             <div className="total-details">
               <p>Total</p>
-              <p>{getTotalCartAmount() + 2}</p>
+              <p>
+                $
+                {(
+                  getTotalCartAmount() + getDeliveryFee(getTotalCartAmount())
+                ).toFixed(2)}
+              </p>
             </div>
           </div>
           <button

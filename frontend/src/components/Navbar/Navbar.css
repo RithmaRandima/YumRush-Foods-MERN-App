@@ -1,8 +1,13 @@
 .navbar {
-  padding: 20px 0px;
+  padding: 26px 0px;
+}
+
+.nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 90%;
+  margin: auto;
 }
 
 .navbar-menu {

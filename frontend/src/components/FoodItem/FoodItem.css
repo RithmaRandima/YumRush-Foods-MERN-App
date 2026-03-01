@@ -1,0 +1,14 @@
+.food-item-box:hover {
+  transform: scale(1.01);
+}
+.food-item-box-info {
+  transition: all 0.2s ease;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.food-item-box:hover .food-item-box-info {
+  max-height: fit-content; /* large enough value */
+  opacity: 1;
+}

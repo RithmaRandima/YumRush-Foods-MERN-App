@@ -3,7 +3,7 @@ import "./PlaceOrder.css";
 import { StoreContext } from "../../context/StoreContext";
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount } = useContext(StoreContext);
+  const { getTotalCartAmount, getDeliveryFee } = useContext(StoreContext);
 
   return (
     <div className="place-order mt-20 flex items-start justify-between gap-12">
@@ -31,18 +31,24 @@ const PlaceOrder = () => {
           <h2>Cart total</h2>
           <div>
             <div className="total-details">
-              <p>Sutotal</p>
-              <p>{getTotalCartAmount()}</p>
+              <p>Subtotal</p>
+              <p>${getTotalCartAmount().toFixed(2)}</p>
             </div>
             <hr />
             <div className="total-details">
               <p>Devivery Fee</p>
-              <p>{2}</p>
+
+              <p>${getDeliveryFee(getTotalCartAmount()).toFixed(2)}</p>
             </div>
             <hr />
             <div className="total-details">
               <p>Total</p>
-              <p>{getTotalCartAmount() + 2}</p>
+              <p>
+                $
+                {(
+                  getTotalCartAmount() + getDeliveryFee(getTotalCartAmount())
+                ).toFixed(2)}
+              </p>
             </div>
           </div>
           <button className="text-white bg-red-400 w-full rounded-full py-4 mt-8">

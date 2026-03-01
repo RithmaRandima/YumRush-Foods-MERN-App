@@ -1,51 +1,37 @@
 import React from "react";
 import "./ExploreMenu.css";
 import { menu_list } from "../../assets/assets";
+import ExploreMenuItem from "../ExploreMenuItem/ExploreMenuItem";
 
 const ExploreMenu = ({ category, setCategory }) => {
   return (
-    <div className="explore-menu flex flex-col gap-5" id="explore-menu">
-      <h1
-        className="text-[#262626]
-      font-bold"
-      >
-        Eplore Our Menu
-      </h1>
-      <p className="max-w-[60%] text-[#808080] ">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non tenetur
-        esse distinctio fugit nulla magni! Ad ipsum necessitatibus at minima!
-      </p>
-      <div className="explore-menu-list flex justify-between items-center gap-7 text-center mx-5 overflow-x-scroll cursor-pointer">
+    <div
+      className="relative explore-menu flex flex-col gap-5 mt-12 items-center"
+      id="explore-menu"
+    >
+      {/* header section */}
+      <div className=" flex flex-col items-center">
+        <h1 className="text-amber-300 text-[60px] font-bold">
+          Eplore Our Menu
+        </h1>
+        <p className="max-w-[60%] text-amber-100 text-center ">
+          Exercitation photo booth stumptown tote bag Banksy, elit small batch
+          freegan sed. Craft beer elit seitan exercitation.
+        </p>
+      </div>
+      {/* list section */}
+      <div className="explore-menu-list flex justify-between items-center gap-7 text-center overflow-x-scroll cursor-pointer my-12  w-[80%] ">
         {menu_list.map((item, index) => {
           return (
-            <div
+            <ExploreMenuItem
               key={index}
-              onClick={() =>
-                setCategory((prev) =>
-                  prev === item.menu_name ? "All" : item.menu_name,
-                )
-              }
-              className="explore-menu-list-item"
-            >
-              <img
-                src={item.menu_image}
-                alt={item.menu_name}
-                className={
-                  category === item.menu_name
-                    ? `w-[10vw] h-[100px] object-cover rounded-full transition-all duration-200 border-4 border-red-400 p-0.5`
-                    : `
-                  w-[10vw] h-[100px] object-cover rounded-full transition-all duration-200`
-                }
-              />
-              <p className="mt-2.5 text-[#747474] text-[18px] ">
-                {item.menu_name}
-              </p>
-            </div>
+              item={item}
+              category={category}
+              setCategory={setCategory}
+            />
           );
         })}
       </div>
-
-      <hr className="my-3 h-0.5 bg-gray-300 border-none" />
     </div>
   );
 };
