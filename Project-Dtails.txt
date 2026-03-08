@@ -1,0 +1,6 @@
+Project Name: YumRush-Store
+
+Connection String : mongodb+srv://programmingrandy_db_user:fxZUEh7SlWAP6Cok@cluster0.jwuaixr.mongodb.net/?appName=Cluster0
+
+Username : programmingrandy_db_user
+Password : fxZUEh7SlWAP6Cok
