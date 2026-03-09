@@ -4,6 +4,7 @@ config();
 import express from "express";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
+import foodRouter from "./routes/foodRoutes.js";
 
 // app config
 const app = express();
@@ -17,11 +18,15 @@ app.get("/", (req, res) => {
   res.send("API Working");
 });
 
-// connect db
-connectDB();
+// api endpoints
+app.use("/api/food", foodRouter);
+app.use("/images", express.static("uploads"));
 
-app.listen(port, () => {
-  console.log(`Server Started on ${port} port`);
+// connect db
+connectDB().then(() => {
+  app.listen(port, () => {
+    console.log(`Server Started on ${port} port`);
+  });
 });
 
 // mongodb+srv://programmingrandy_db_user:fxZUEh7SlWAP6Cok@cluster0.jwuaixr.mongodb.net/?appName=Cluster0
