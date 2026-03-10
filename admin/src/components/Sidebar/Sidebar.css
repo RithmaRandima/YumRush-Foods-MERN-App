@@ -1,0 +1,18 @@
+.sidebar {
+  font-size: max(1vw, 13px);
+}
+
+.sidebar-option {
+  display: flex;
+  text-align: center;
+  gap: 12px;
+  border: 1px solid #a9a9a9;
+  border-right: 0;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.sidebar-option.active {
+  background-color: #fff0ed;
+  border-color: tomato;
+}
