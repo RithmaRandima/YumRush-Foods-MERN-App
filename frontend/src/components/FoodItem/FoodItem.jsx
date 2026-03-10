@@ -4,13 +4,18 @@ import { FaMinus, FaPlus, FaStar } from "react-icons/fa";
 import { StoreContext } from "../../context/StoreContext";
 
 const FoodItem = ({ id, name, price, description, image }) => {
-  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
+  const { cartItems, addToCart, removeFromCart, url } =
+    useContext(StoreContext);
 
   return (
     <div className="food-item-box relative w-full mx-auto transition-all duration-150 rounded-xl overflow-hidden">
       {/* img container */}
       <div className="w-full h-full relative">
-        <img className="w-full h-[280px] object-cover" src={image} alt="" />
+        <img
+          className="w-full h-[280px] object-cover"
+          src={`${url}/images/${image}`}
+          alt=""
+        />
         <div className="absolute right-2 top-2">
           {!cartItems[id] ? (
             <button

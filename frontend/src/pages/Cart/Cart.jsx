@@ -12,6 +12,7 @@ const Cart = () => {
     food_list,
     getTotalCartAmount,
     getDeliveryFee,
+    url,
   } = useContext(StoreContext);
 
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const Cart = () => {
               <div key={index}>
                 <div className="grid grid-cols-[1fr_1.5fr_1fr_1fr_1fr_0.5fr] text-black text-[14px] items-center my-2.5">
                   <img
-                    src={item.image}
+                    src={url + "/images/" + item.image}
                     alt=""
                     className="w-30 h-20 object-cover"
                   />
