@@ -1,13 +1,19 @@
 import React, { useContext, useState } from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { HiShoppingBag } from "react-icons/hi2";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
-  const { getTotalCartAmount } = useContext(StoreContext);
+  const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    navigate("/");
+  };
   return (
     <div className="navbar bg-gradient-to-t from-black to-black/95 border-b border-amber-300/20">
       <div className="nav-container">
@@ -73,15 +79,34 @@ const Navbar = ({ setShowLogin }) => {
               <></>
             )}
           </div>
-          <button
-            className="btn-mini"
-            onClick={() => {
-              setShowLogin(true);
-              setMenu("sign in");
-            }}
-          >
-            sign in
-          </button>
+          {!token ? (
+            <button
+              className="btn-mini"
+              onClick={() => {
+                setShowLogin(true);
+                setMenu("sign in");
+              }}
+            >
+              sign in
+            </button>
+          ) : (
+            <div className="navbar-profile bg-white">
+              <div className="w-[30px] h-[30px] bg-red-300 rounded-full">
+                <img src="" alt="" />
+              </div>
+              <ul className="nav-profile-dropdown">
+                <li>
+                  bag icon
+                  <p>orders</p>
+                </li>
+                <hr />
+                <li onClick={logout}>
+                  logout icon
+                  <p>logout</p>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
