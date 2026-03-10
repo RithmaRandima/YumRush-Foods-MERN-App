@@ -22,9 +22,33 @@ const Add = () => {
     setData((data) => ({ ...data, [name]: value }));
   };
 
+  const onSubmitHandeler = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("price", Number(data.price));
+    formData.append("category", data.category);
+    formData.append("image", image);
+
+    const response = await axios.post(`${url}/api/food/add`, formData);
+    if (response.data.success) {
+      setData({
+        name: "",
+        description: "",
+        price: "",
+        category: "Salad",
+      });
+      setImage(false);
+      toast.success(response.data.message);
+    } else {
+      toast.error("Error adding food");
+    }
+  };
+
   return (
     <div className="add w-[70%] mt-12 text-[#6d6d6d] ml-[max(5vw,25px)] text-[16px]">
-      <form className="gap-5 space-between">
+      <form className="gap-5 space-between" onSubmit={onSubmitHandeler}>
         {/* add image */}
         <div className="add-img-upload space-between">
           <p>Upload Image</p>
