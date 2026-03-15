@@ -12,7 +12,7 @@ const CartListRowItem = ({
   return (
     <div key={index}>
       <div className="grid grid-cols-[1fr_1.5fr_1fr_1fr_1fr_0.5fr] text-white text-[14px] items-center text-center my-4 hover:shadow-[1px_1px_1px_rgba(251,191,36,0.1)]  rounded-2xl bg-gray-900/30 py-2 pl-4 hover:-translate-y-1 transition duration-200 pr-3">
-        <div className="w-full h-30 bg-red-200">
+        <div className="w-full h-30 ">
           <img
             src={url + "/images/" + item.image}
             alt=""

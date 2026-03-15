@@ -5,8 +5,16 @@ const foodSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
+  shortdescription: {
     type: String,
+    required: true,
+  },
+  longdescription: {
+    type: String,
+    required: true,
+  },
+  ingredients: {
+    type: [String],
     required: true,
   },
   price: {

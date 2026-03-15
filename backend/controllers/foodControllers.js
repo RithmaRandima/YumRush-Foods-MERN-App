@@ -5,14 +5,25 @@ import fs from "fs";
 export const addFood = async (req, res) => {
   try {
     let image_filename = `${req.file.filename}`;
-    let { name, description, price, category } = req.body;
+    let {
+      name,
+      shortdescription,
+      longdescription,
+      price,
+      category,
+      ingredients,
+    } = req.body;
+
+    const ingredientArray = ingredients.split(",").map((item) => item.trim());
 
     const food = new foodModel({
-      name: name,
-      description: description,
-      price: price,
+      name,
+      shortdescription,
+      longdescription,
+      price,
       image: image_filename,
-      category: category,
+      category,
+      ingredients: ingredientArray,
     });
 
     const newNote = await food.save();
@@ -28,9 +39,19 @@ export const addFood = async (req, res) => {
 export const getAllFoods = async (req, res) => {
   try {
     const foods = await foodModel.find();
-    res.status(200).json({ status: true, data: foods });
+    res.status(200).json({ success: true, data: foods });
   } catch (error) {
     console.log("Error in getAllFoods Function", error);
+    res.status(500).json({ success: false, message: "Internal Server Error " });
+  }
+};
+
+export const getItemById = async (req, res) => {
+  try {
+    const food = await foodModel.findById(req.params.id);
+    res.status(200).json({ success: true, data: food });
+  } catch (error) {
+    console.log("Error in getItemById Function", error);
     res.status(500).json({ success: false, message: "Internal Server Error " });
   }
 };

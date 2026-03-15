@@ -8,9 +8,11 @@ const Add = ({ url }) => {
   const [image, setImage] = useState(false);
   const [data, setData] = useState({
     name: "",
-    description: "",
+    shortdescription: "",
+    longdescription: "",
     price: "",
     category: "Salad",
+    ingredients: "",
   });
 
   const onChangeHandler = (event) => {
@@ -24,18 +26,22 @@ const Add = ({ url }) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("name", data.name);
-    formData.append("description", data.description);
+    formData.append("shortdescription", data.shortdescription);
+    formData.append("longdescription", data.longdescription);
     formData.append("price", Number(data.price));
     formData.append("category", data.category);
+    formData.append("ingredients", data.ingredients);
     formData.append("image", image);
 
     const response = await axios.post(`${url}/api/food/add`, formData);
     if (response.data.success) {
       setData({
         name: "",
-        description: "",
+        shortdescription: "",
+        longdescription: "",
         price: "",
         category: "Salad",
+        ingredients: "",
       });
       setImage(false);
       toast.success(response.data.message);
@@ -90,20 +96,36 @@ const Add = ({ url }) => {
           />
         </div>
 
-        {/* add product description */}
-        <div className="add-product-description space-between">
-          <p>Product Description</p>
-          <textarea
-            type="text"
-            name="description"
-            rows={5}
-            placeholder="Write Content Here"
-            onChange={onChangeHandler}
-            value={data.description}
-          ></textarea>
+        {/*short and long product description */}
+        <div className="flex gap-7.5 mt-2">
+          {/* add product short description */}
+          <div className="add-product-description space-between">
+            <p>Short Description</p>
+            <textarea
+              type="text"
+              name="shortdescription"
+              rows={3}
+              placeholder="Write Content Here"
+              onChange={onChangeHandler}
+              value={data.shortdescription}
+            ></textarea>
+          </div>
+
+          {/* add product long description */}
+          <div className="add-product-description space-between">
+            <p>Product Description</p>
+            <textarea
+              type="text"
+              name="longdescription"
+              rows={5}
+              placeholder="Write Content Here"
+              onChange={onChangeHandler}
+              value={data.longdescription}
+            ></textarea>
+          </div>
         </div>
 
-        {/* add product category price */}
+        {/* add product category price and ingredients */}
         <div className="add-category-price">
           <div className="add-category space-between">
             <p>Product Category</p>
@@ -132,6 +154,18 @@ const Add = ({ url }) => {
               type="Number"
               name="price"
               placeholder="$20"
+            />
+          </div>
+
+          {/* add product Ingredients */}
+          <div className="add-product-name space-between">
+            <p>Product Ingredients</p>
+            <input
+              type="text"
+              name="ingredients"
+              placeholder="Enter Ingredients"
+              onChange={onChangeHandler}
+              value={data.ingredients}
             />
           </div>
         </div>

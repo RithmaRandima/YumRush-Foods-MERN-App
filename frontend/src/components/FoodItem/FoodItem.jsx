@@ -2,13 +2,17 @@ import React, { useContext } from "react";
 import "./FoodItem.css";
 import { FaMinus, FaPlus, FaStar } from "react-icons/fa";
 import { StoreContext } from "../../context/StoreContext";
+import { Link } from "react-router-dom";
 
 const FoodItem = ({ id, name, price, description, image }) => {
   const { cartItems, addToCart, removeFromCart, url } =
     useContext(StoreContext);
 
   return (
-    <div className="food-item-box relative w-full mx-auto transition-all duration-150 rounded-xl overflow-hidden cursor-auto">
+    <Link
+      to={`/food/${id}`}
+      className="food-item-box relative w-full mx-auto transition-all duration-150 rounded-xl overflow-hidden cursor-auto"
+    >
       {/* img container */}
       <div className="w-full h-full relative">
         <img
@@ -19,7 +23,11 @@ const FoodItem = ({ id, name, price, description, image }) => {
         <div className="absolute right-2 top-2">
           {!cartItems[id] ? (
             <button
-              onClick={() => addToCart(id)}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                addToCart(id);
+              }}
               className="w-[20px] h-[20px] bg-black rounded-full hover:scale-105 duration-300"
             >
               <FaPlus className="text-[10px] mx-auto text-white" />
@@ -27,7 +35,11 @@ const FoodItem = ({ id, name, price, description, image }) => {
           ) : (
             <div className="flex text-white items-center gap-1.5 bg-white/20 rounded-full">
               <button
-                onClick={() => removeFromCart(id)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  removeFromCart(id);
+                }}
                 className="w-[20px] h-[20px] bg-black rounded-full hover:scale-105 duration-300"
               >
                 <FaMinus className="text-[10px] mx-auto" />
@@ -36,7 +48,11 @@ const FoodItem = ({ id, name, price, description, image }) => {
                 {cartItems[id]}
               </p>
               <button
-                onClick={() => addToCart(id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  addToCart(id);
+                }}
                 className="w-[20px] h-[20px] bg-black rounded-full hover:scale-105 duration-300"
               >
                 <FaPlus className="text-[10px] mx-auto" />
@@ -65,7 +81,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
