@@ -4,6 +4,9 @@
   color: #555;
 }
 
-hr {
-  margin: 10px 0;
+.cart-items-title p {
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
 }

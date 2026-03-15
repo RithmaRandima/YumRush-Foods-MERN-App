@@ -45,14 +45,14 @@ const Add = ({ url }) => {
   };
 
   return (
-    <div className="add w-[70%] mt-12 text-[#6d6d6d] ml-[max(5vw,25px)] text-[16px]">
+    <div className="add w-[80%]  text-white  text-[16px]  bg-[#151515] rounded-2xl pl-10 p-3">
       <form className="gap-5 space-between" onSubmit={onSubmitHandeler}>
         {/* add image */}
         <div className="add-img-upload space-between">
           <p>Upload Image</p>
           <label
             htmlFor="image"
-            className="cursor-pointer bg-gray-100 text-gray-400 rounded-[2px] w-[125px] h-[70px] flex flex-col items-center justify-center"
+            className="cursor-pointer bg-[#0f0f0f] text-amber-300/30 hover:text-amber-300/40 rounded-xs w-[105px] h-[60px] flex flex-col items-center justify-center"
           >
             {image ? (
               <img
@@ -96,7 +96,7 @@ const Add = ({ url }) => {
           <textarea
             type="text"
             name="description"
-            rows={6}
+            rows={5}
             placeholder="Write Content Here"
             onChange={onChangeHandler}
             value={data.description}
@@ -107,7 +107,11 @@ const Add = ({ url }) => {
         <div className="add-category-price">
           <div className="add-category space-between">
             <p>Product Category</p>
-            <select onChange={onChangeHandler} name="category">
+            <select
+              onChange={onChangeHandler}
+              name="category"
+              className="bg-[#0f0f0f] rounded-full"
+            >
               <option value="Salad">Salad</option>
               <option value="Rolls">Rolls</option>
               <option value="Deserts">Deserts</option>
@@ -131,7 +135,10 @@ const Add = ({ url }) => {
             />
           </div>
         </div>
-        <button className="add-btn" type="submit">
+        <button
+          className="border border-amber-300 w-fit p-2 px-8 mt-4 tracking-[3px] text-[12px] font-bold hover:bg-amber-300 hover:text-black cursor-pointer duration-200 hover:-translate-y-1"
+          type="submit"
+        >
           ADD
         </button>
       </form>

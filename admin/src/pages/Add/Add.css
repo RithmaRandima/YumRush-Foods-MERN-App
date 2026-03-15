@@ -6,7 +6,16 @@
 
 input,
 textarea {
-  border: 1px solid red;
+  background-color: #0f0f0f;
+}
+
+input {
+  border-radius: 40px;
+}
+
+input:focus,
+textarea:focus {
+  outline: 1px solid #fcd34d;
 }
 
 .add-product-name,

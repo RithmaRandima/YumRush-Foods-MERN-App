@@ -11,12 +11,12 @@ const App = () => {
   const url = "http://localhost:4000";
 
   return (
-    <div>
+    <div className="min-h-screen">
       <ToastContainer autoClose={500} />
       <Navbar />
       <hr />
       {/* app container */}
-      <div className="app-content flex">
+      <div className="app-content flex items-start mt-2 pr-5 gap-5">
         <Sidebar />
         <Routes>
           <Route path="/add" element={<Add url={url} />} />

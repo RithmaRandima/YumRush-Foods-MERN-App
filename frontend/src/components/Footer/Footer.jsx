@@ -4,7 +4,7 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <div
-      className="text-[#d9d9d9] bg-black flex flex-col items-center gap-5 p-20 pb-5 mt-20"
+      className="text-[#d9d9d9] bg-black flex flex-col items-center gap-5 p-20 pb-5"
       id="footer"
     >
       {/* content */}

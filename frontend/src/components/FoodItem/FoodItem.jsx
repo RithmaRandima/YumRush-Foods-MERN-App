@@ -8,7 +8,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
     useContext(StoreContext);
 
   return (
-    <div className="food-item-box relative w-full mx-auto transition-all duration-150 rounded-xl overflow-hidden">
+    <div className="food-item-box relative w-full mx-auto transition-all duration-150 rounded-xl overflow-hidden cursor-auto">
       {/* img container */}
       <div className="w-full h-full relative">
         <img
@@ -46,11 +46,11 @@ const FoodItem = ({ id, name, price, description, image }) => {
         </div>
       </div>
       {/* food item information */}
-      <div className=" food-item-box-info absolute p-3 bottom-0 bg-gradient-to-t from-black to-black/40 text-white left-0 right-0  duration-200">
+      <div className=" food-item-box-info absolute p-3 bottom-0 bg-gradient-to-t from-black to-black/60 text-white left-0 right-0  duration-200">
         {/* rating */}
 
-        <p className="text-amber-100 text-[12px]">{description}</p>
-        <p className="text-amber-400 text-[20px] font-semibold mx-2.5">
+        <p className="text-amber-100 text-[14px]">{description}</p>
+        <p className="text-amber-400 text-[20px] font-semibold mx-2.5 my-2">
           ${price.toFixed(2)}
         </p>
 

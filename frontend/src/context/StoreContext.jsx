@@ -46,6 +46,11 @@ const StoreContextProvider = (props) => {
     return deliveryCharge;
   };
 
+  const getDiscount = (cartAmount) => {
+    let discountPrice = cartAmount * 0.05;
+    return discountPrice;
+  };
+
   const fetchFoodList = async () => {
     const response = await axios.get(`${url}/api/food/list`);
     setFoodList(response.data.data);
@@ -74,6 +79,7 @@ const StoreContextProvider = (props) => {
     url,
     token,
     setToken,
+    getDiscount,
   };
   return (
     <StoreContext.Provider value={contextValue}>
