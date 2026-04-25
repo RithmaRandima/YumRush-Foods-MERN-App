@@ -21,7 +21,7 @@ export const loginUser = async (req, res) => {
       return res.json({ success: false, message: "Invalid credentials" });
     }
 
-    const token = createToken(user.id);
+    const token = createToken(user._id);
     return res.json({ success: true, token, user });
   } catch (error) {
     console.log("Error on loginUser function", error);
@@ -64,7 +64,7 @@ export const registerUser = async (req, res) => {
     const user = await newUser.save();
     const token = createToken(user._id);
 
-    res.json({ success: true, user });
+    res.json({ success: true, token, user });
   } catch (error) {
     console.log("Error on registerUser function", error);
     res.status(500).json({ success: false, message: "Error" });

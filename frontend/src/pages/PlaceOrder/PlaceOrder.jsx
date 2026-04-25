@@ -17,7 +17,7 @@ const PlaceOrder = () => {
   return (
     <div className="place-order mt-10 flex flex-col sm:flex-row items-start justify-between gap-12 text-white sm:px-15">
       {/* left side*/}
-      <div className="left flex-1">
+      <div className="left flex-1 pr-10">
         <p className="text-[30px] font-bold mb-5">Delivery Information</p>
         <div className="multy-fields">
           <input type="text" placeholder="First name" />
