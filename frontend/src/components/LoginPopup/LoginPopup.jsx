@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./LoginPopup.css";
 import { IoClose } from "react-icons/io5";
 import { useContext } from "react";
 import { StoreContext } from "../../context/StoreContext";
@@ -44,17 +43,20 @@ const LoginPopup = ({ setShowLogin }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 w-full h-screen  bg-black/50 flex justify-center items-center">
+    <div className="fixed inset-0 z-50 w-full h-screen  bg-black/50 backdrop-blur-[2px] flex justify-center items-center">
       <form
         onSubmit={onLogin}
-        className="w-[30%] max-w-lg bg-white rounded-lg flex flex-col gap-5 py-6 px-8 text-[14px] text-[#808080]"
+        className="w-[30%] max-w-lg bg-white rounded-lg flex flex-col gap-5 py-6 px-5 text-[14px] text-[#808080] pb-10"
       >
-        <div className="flex justify-between items-center text-black">
+        <div className="flex justify-between items-center text-black font-extrabold text-[20px]">
           <h2>{currentState}</h2>
-          <IoClose onClick={() => setShowLogin(false)} />
+          <IoClose
+            className="font-extrabold text-[22px] cursor-pointer hover:scale-105"
+            onClick={() => setShowLogin(false)}
+          />
         </div>
         {/* input fields */}
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 mt-3">
           {currentState === "Login" ? (
             <></>
           ) : (
@@ -82,7 +84,7 @@ const LoginPopup = ({ setShowLogin }) => {
 
           <input
             type="password"
-            placeholder="ENter Password"
+            placeholder="Enter Password"
             className="outline-none border border-[#c9c9c9]
             p-2.5 rounded-xl"
             name="password"
@@ -93,7 +95,7 @@ const LoginPopup = ({ setShowLogin }) => {
         </div>
         <button
           type="submit"
-          className="p-2.5 rounded-xl text-white bg-red-200 text-[15px]cursor-pointer "
+          className="p-2.5 rounded-xl text-white bg-amber-400 hover:bg-amber-500 font-bold text-[15px] cursor-pointer "
         >
           {currentState === "Sign Up" ? "Create account" : "Login"}
         </button>
@@ -104,20 +106,20 @@ const LoginPopup = ({ setShowLogin }) => {
         </div>
         {/* change between Login and Sign up */}
         {currentState === "Login" ? (
-          <p>
+          <p className="text-center">
             Create new account?{" "}
             <span
-              className="text-red-200 font-semibold cursor-pointer"
+              className="text-amber-400 font-semibold cursor-pointer"
               onClick={() => setCurrentState("Sign Up")}
             >
               Click here
             </span>
           </p>
         ) : (
-          <p>
+          <p className="text-center">
             Already have an account?{" "}
             <span
-              className="text-red-200 font-semibold cursor-pointer"
+              className="text-amber-400 font-semibold cursor-pointer"
               onClick={() => setCurrentState("Login")}
             >
               Login here

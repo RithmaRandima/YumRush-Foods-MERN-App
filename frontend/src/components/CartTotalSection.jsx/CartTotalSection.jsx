@@ -34,19 +34,19 @@ const CartTotalSection = () => {
       </div>
       {/* total section */}
       <div className="flex-1 flex flex-col gap-5 text-white mt-6">
-        <h1 className="text-[30px] font-bold mb-2">Total</h1>
+        <h1 className="text-[30px] font-semibold ">Total</h1>
 
         <div className="px-2">
           <div className="flex items-center justify-between my-3">
-            <p className="font-semibold capitalize text-[15px]">Items Total</p>
-            <p className="text-white font-semibold text-[20px]">
+            <p className="capitalize text-[15px]">Items Total</p>
+            <p className="text-white  text-[20px]">
               ${totalCartAmount.toFixed(2)}
             </p>
           </div>
 
           <div className="flex items-center justify-between my-3">
-            <p className="font-semibold capitalize text-[15px]">Discount</p>
-            <p className="text-white font-semibold text-[18px]">
+            <p className=" capitalize text-[15px]">Discount</p>
+            <p className="text-white  text-[18px]">
               $ {discountPrice.toFixed(2)}
             </p>
           </div>
@@ -54,24 +54,20 @@ const CartTotalSection = () => {
           <hr className="text-white/20 my-2" />
 
           <div className="flex items-center justify-between my-4">
-            <p className="font-bold capitalize text-[18px]">Subtotal</p>
-            <p className="text-white font-bold text-[20px]">
+            <p className="font-semibold capitalize text-[18px]">Subtotal</p>
+            <p className="text-white font-semibold text-[20px]">
               $ {subTotal.toFixed(2)}
             </p>
           </div>
 
           <div className="flex items-center justify-between my-2">
-            <p className="font-semibold capitalize text-[15px]">tax(10%)</p>
-            <p className="text-white font-semibold text-[18px]">
-              $ {taxPrice.toFixed(2)}
-            </p>
+            <p className="capitalize text-[15px]">tax(10%)</p>
+            <p className="text-white text-[18px]">$ {taxPrice.toFixed(2)}</p>
           </div>
 
           <div className="flex items-center justify-between my-2">
-            <p className="font-semibold capitalize text-[15px]">
-              delivery cost
-            </p>
-            <p className="text-white font-semibold text-[18px]">
+            <p className=" capitalize text-[15px]">delivery cost</p>
+            <p className="text-white text-[18px]">
               ${deliveryPrice.toFixed(2)}
             </p>
           </div>
@@ -80,9 +76,7 @@ const CartTotalSection = () => {
 
           {/* Estimate total section */}
           <div className="flex items-center justify-between my-2 mt-5">
-            <p className="font-semibold capitalize text-[20px]">
-              Estmate Total
-            </p>
+            <p className=" capitalize text-[20px]">Estmate Total</p>
             <p className="text-amber-400 font-extrabold text-[20px]">
               ${Number(fullAmount.toFixed(2))}
             </p>
