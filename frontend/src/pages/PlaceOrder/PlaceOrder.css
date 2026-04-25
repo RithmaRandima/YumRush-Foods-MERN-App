@@ -1,10 +1,14 @@
 .place-order .left input {
-  margin-bottom: 15px;
   width: 100%;
   padding: 10px;
   border: 1px solid #c5c5c5;
   border-radius: 4px;
-  outline-color: tomato;
+  outline-width: 1px;
+  margin-bottom: 20px;
+}
+
+.place-order .left input:focus {
+  outline: 1px solid #fcd34d;
 }
 
 .place-order .left .multy-fields {
