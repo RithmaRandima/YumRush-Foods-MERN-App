@@ -33,6 +33,18 @@ const Add = ({ url }) => {
     formData.append("ingredients", data.ingredients);
     formData.append("image", image);
 
+    if (!data.name) return toast.error("Food name is required");
+    if (!data.shortdescription)
+      return toast.error("Short description required");
+    if (!data.longdescription) return toast.error("Long description required");
+    if (!data.price) return toast.error("Price is required");
+    if (!data.ingredients) return toast.error("Ingredients are required");
+    if (!image) return toast.error("Food image is required");
+    if (!data.ingredients.includes(",")) {
+      return toast.error(
+        "Enter ingredients separated by commas (e.g. Tomato, Cheese, Onion)",
+      );
+    }
     const response = await axios.post(`${url}/api/food/add`, formData);
     if (response.data.success) {
       setData({
@@ -85,7 +97,7 @@ const Add = ({ url }) => {
         </div>
 
         {/* add product name */}
-        <div className="add-product-name space-between">
+        <div className="add-product-name space-between my-3">
           <p>Product Name</p>
           <input
             type="text"
@@ -97,7 +109,7 @@ const Add = ({ url }) => {
         </div>
 
         {/*short and long product description */}
-        <div className="flex gap-7.5 mt-2">
+        <div className="flex gap-7.5  my-3">
           {/* add product short description */}
           <div className="add-product-description space-between">
             <p>Short Description</p>
@@ -125,8 +137,8 @@ const Add = ({ url }) => {
           </div>
         </div>
 
-        {/* add product category price and ingredients */}
-        <div className="add-category-price">
+        {/* add product category price */}
+        <div className="add-category-price ">
           <div className="add-category space-between">
             <p>Product Category</p>
             <select
@@ -156,18 +168,18 @@ const Add = ({ url }) => {
               placeholder="$20"
             />
           </div>
+        </div>
 
-          {/* add product Ingredients */}
-          <div className="add-product-name space-between">
-            <p>Product Ingredients</p>
-            <input
-              type="text"
-              name="ingredients"
-              placeholder="Enter Ingredients"
-              onChange={onChangeHandler}
-              value={data.ingredients}
-            />
-          </div>
+        {/* add product Ingredients */}
+        <div className="add-infredients space-between my-3 ">
+          <p>Product Ingredients</p>
+          <input
+            type="text"
+            name="ingredients"
+            placeholder='Enter Ingredients (Seperate item by ",")'
+            onChange={onChangeHandler}
+            value={data.ingredients}
+          />
         </div>
         <button
           className="border border-amber-300 w-fit p-2 px-8 mt-4 tracking-[3px] text-[12px] font-bold hover:bg-amber-300 hover:text-black cursor-pointer duration-200 hover:-translate-y-1"

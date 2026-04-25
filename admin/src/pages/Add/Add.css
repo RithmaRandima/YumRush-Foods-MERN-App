@@ -19,11 +19,13 @@ textarea:focus {
 }
 
 .add-product-name,
+.add-infredients,
 .add-product-description {
   width: max(45%, 300px);
 }
 
 .add-product-name input,
+.add-infredients input,
 .add-product-description textarea {
   padding: 10px;
 }

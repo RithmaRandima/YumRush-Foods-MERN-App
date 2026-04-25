@@ -11,7 +11,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
   return (
     <Link
       to={`/food/${id}`}
-      className="food-item-box relative w-full mx-auto transition-all duration-150 rounded-xl overflow-hidden cursor-auto"
+      className="food-item-box relative w-full mx-auto transition-all duration-400 overflow-hidden cursor-auto"
     >
       {/* img container */}
       <div className="w-full h-full relative">
@@ -28,7 +28,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
                 e.stopPropagation();
                 addToCart(id);
               }}
-              className="w-[20px] h-[20px] bg-black rounded-full hover:scale-105 duration-300"
+              className="w-7 h-7 bg-black rounded-full hover:scale-105 duration-300"
             >
               <FaPlus className="text-[10px] mx-auto text-white" />
             </button>
@@ -40,7 +40,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
                   e.stopPropagation();
                   removeFromCart(id);
                 }}
-                className="w-[20px] h-[20px] bg-black rounded-full hover:scale-105 duration-300"
+                className="w-6 h-6 bg-black rounded-full hover:scale-105 duration-300"
               >
                 <FaMinus className="text-[10px] mx-auto" />
               </button>
@@ -53,7 +53,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
                   e.preventDefault();
                   addToCart(id);
                 }}
-                className="w-[20px] h-[20px] bg-black rounded-full hover:scale-105 duration-300"
+                className="w-6 h-6 bg-black rounded-full hover:scale-105 duration-300"
               >
                 <FaPlus className="text-[10px] mx-auto" />
               </button>
