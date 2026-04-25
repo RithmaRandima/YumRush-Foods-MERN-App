@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
@@ -8,14 +7,16 @@ import Footer from "./components/Footer/Footer";
 import LoginPopup from "./components/LoginPopup/LoginPopup";
 import FoodDetail from "./pages/FoodDetail/FoodDetail";
 import Products from "./pages/Products/Products";
+import { useContext } from "react";
+import { StoreContext } from "./context/StoreContext";
 
 const App = () => {
-  const [showLogin, setShowLogin] = useState(false);
+  const { showLogin } = useContext(StoreContext);
   return (
     <>
-      {showLogin && <LoginPopup setShowLogin={setShowLogin} />}
+      {showLogin && <LoginPopup />}
       <div className="app">
-        <Navbar setShowLogin={setShowLogin} />
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />

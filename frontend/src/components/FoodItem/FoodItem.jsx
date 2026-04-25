@@ -2,11 +2,15 @@ import React, { useContext } from "react";
 import "./FoodItem.css";
 import { FaMinus, FaPlus, FaStar } from "react-icons/fa";
 import { StoreContext } from "../../context/StoreContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import LoginPopup from "../LoginPopup/LoginPopup";
 
 const FoodItem = ({ id, name, price, description, image }) => {
-  const { cartItems, addToCart, removeFromCart, url } =
+  const { cartItems, addToCart, removeFromCart, url, token, setShowLogin } =
     useContext(StoreContext);
+
+  console.log(token);
+  const navigate = useNavigate();
 
   return (
     <Link
@@ -26,6 +30,11 @@ const FoodItem = ({ id, name, price, description, image }) => {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
+
+                if (!token) {
+                  setShowLogin(true);
+                  return;
+                }
                 addToCart(id);
               }}
               className="w-7 h-7 bg-black rounded-full hover:scale-105 duration-300"
@@ -38,6 +47,10 @@ const FoodItem = ({ id, name, price, description, image }) => {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
+                  if (!token) {
+                    setShowLogin(true);
+                    return;
+                  }
                   removeFromCart(id);
                 }}
                 className="w-6 h-6 bg-black rounded-full hover:scale-105 duration-300"
@@ -51,6 +64,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
+
                   addToCart(id);
                 }}
                 className="w-6 h-6 bg-black rounded-full hover:scale-105 duration-300"

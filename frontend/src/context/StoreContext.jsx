@@ -8,7 +8,8 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
   const [food_list, setFoodList] = useState([]);
-
+  const [showLogin, setShowLogin] = useState(false);
+  const [user, setUser] = useState({});
   // add to cart function
   const addToCart = (itemID) => {
     if (!cartItems[itemID]) {
@@ -81,7 +82,13 @@ const StoreContextProvider = (props) => {
     token,
     setToken,
     getDiscount,
+    showLogin,
+    setShowLogin,
+    user,
+    setUser,
   };
+
+  console.log(user);
   return (
     <StoreContext.Provider value={contextValue}>
       {props.children}

@@ -10,8 +10,8 @@ const Newsletter = () => {
 
   const [scrollY, setScrollY] = useState(0);
   const baseOffset1 = 1500;
-  const baseOffset2 = -700;
-  const baseOffset3 = 100;
+  const baseOffset2 = 1850;
+  const baseOffset3 = 2100;
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll);
@@ -19,7 +19,7 @@ const Newsletter = () => {
   }, []);
 
   return (
-    <div className="relative h-full p-5 px-20 flex flex-col gap-10 ">
+    <div className="relative h-full p-5 px-20 flex flex-col gap-10 overflow-hidden ">
       {/* top */}
       <div className=" flex ">
         <div className="flex-1 flex justify-center items-center text-center">

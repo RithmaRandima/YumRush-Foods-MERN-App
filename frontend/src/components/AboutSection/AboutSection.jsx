@@ -22,14 +22,14 @@ const AboutSection = () => {
             Our Story
           </h1>
         </div>
-        <h1 className="text-[22px] my-7 font-extralight tracking-[2px] leading-10">
+        <h1 className="text-[22px] my-7 font-extralight tracking-[2px] leading-10 text-justify">
           "Cooking is like fashion—always evolving. This restaurant is
           passionate about exploring new flavors and ingredients from around the
           world. Inspired by places like Australia, the Bahamas, Budapest, and
           Moscow, every new ingredient becomes part of a unique and delicious
           dish."
         </h1>
-        <p className="text-[15px] mb-7  tracking-[2px] leading-7">
+        <p className="text-[15px] mb-7  tracking-[2px] leading-7 text-justify">
           At our restaurant, dining is an art of elegance and refinement. Each
           dish is crafted from the finest ingredients, blending global
           inspirations with meticulous attention to detail. Guests are invited
@@ -38,7 +38,7 @@ const AboutSection = () => {
           cuisine meets attentive service and memorable moments.
         </p>
 
-        <p className="text-[15px] mb-7 tracking-[2px] leading-7">
+        <p className="text-[15px] mb-7 tracking-[2px] leading-7 text-justify">
           Our culinary philosophy blends innovation with artistry, transforming
           the finest ingredients into exquisite dishes. The menu evolves with
           the seasons, showcasing global inspirations while honoring classic

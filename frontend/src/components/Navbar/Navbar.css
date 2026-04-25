@@ -17,34 +17,46 @@
 .navbar-profile {
   position: relative;
 }
+.navbar-profile::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: -20px;
+  width: 200%;
+  height: 40px;
+}
 
 .nav-profile-dropdown {
   position: absolute;
-  background-color: antiquewhite;
   display: none;
-  right: 0;
+  top: 70px;
+  width: 180px;
+  padding: 5px;
+  right: -50px;
+  color: white;
   z-index: 1;
 }
 
 .nav-profile-dropdown li {
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
+  background: #000;
   gap: 10px;
+  padding: 4px;
+  margin: 9px 0;
 }
 
 .nav-profile-dropdown li:hover {
-  color: tomato;
+  color: #fcd34d;
 }
 
 .navbar-profile:hover .nav-profile-dropdown {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  background: #fff2ef;
+  /* background: #fff2ef; */
   padding-block-start: 12px 25px;
   border-radius: 4px;
-  border: 1px solid red;
-  outline: 2px solid white;
   list-style: none;
 }

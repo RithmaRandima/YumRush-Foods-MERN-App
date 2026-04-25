@@ -21,7 +21,6 @@ const Home = () => {
       <HomeMenuSection />
       <VideoSection />
       <Newsletter />
-      {/* <AppDownload /> */}
     </div>
   );
 };

@@ -4,16 +4,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { HiShoppingBag } from "react-icons/hi2";
-
-const Navbar = ({ setShowLogin }) => {
+import { RiLogoutCircleLine } from "react-icons/ri";
+const Navbar = () => {
   const [menu, setMenu] = useState("home");
-  const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
+  const { getTotalCartAmount, token, setToken, setShowLogin, user } =
+    useContext(StoreContext);
+
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
     navigate("/");
   };
+
   return (
     <div className="navbar bg-gradient-to-t from-black to-black/95 border-b border-amber-300/20">
       <div className="nav-container">
@@ -65,11 +68,16 @@ const Navbar = ({ setShowLogin }) => {
             {/* cart */}
             <Link to={"/cart"} onClick={() => setMenu("cart")}>
               <HiShoppingBag
-                className={
-                  menu === "cart"
-                    ? " text-amber-200 text-[23px]"
-                    : "text-[23px]"
-                }
+                className={`
+                   hover:text-amber-200
+                   hover:scale-110
+                   transition-all
+                   duration-200
+                  ${
+                    menu === "cart"
+                      ? " text-amber-200 text-[23px]"
+                      : "text-[23px]"
+                  }`}
               />
             </Link>
             {/* dot icon */}
@@ -81,7 +89,7 @@ const Navbar = ({ setShowLogin }) => {
           </div>
           {!token ? (
             <button
-              className="btn-mini"
+              className="btn-mini cursor-pointer"
               onClick={() => {
                 setShowLogin(true);
                 setMenu("sign in");
@@ -90,21 +98,40 @@ const Navbar = ({ setShowLogin }) => {
               sign in
             </button>
           ) : (
-            <div className="navbar-profile bg-white">
-              <div className="w-[30px] h-[30px] bg-red-300 rounded-full">
-                <img src="" alt="" />
+            <div className="navbar-profile">
+              <div className="w-[40px] h-[40px] flex items-center justify-center bg-amber-300 font-extrabold tracking-wide rounded-full">
+                {user?.name
+                  ?.split(" ")
+                  .map((word) => word[0])
+                  .join("")
+                  .toUpperCase()}
               </div>
-              <ul className="nav-profile-dropdown">
-                <li>
-                  bag icon
-                  <p>orders</p>
-                </li>
-                <hr />
-                <li onClick={logout}>
-                  logout icon
-                  <p>logout</p>
-                </li>
-              </ul>
+              <div className="nav-profile-dropdown bg-[#0f0f0f]">
+                <div className="pt-2 flex justify-center flex-col items-center">
+                  <div className="w-[35px] h-[35px] flex items-center justify-center border-2 text-amber-300 font-extrabold tracking-wide rounded-full">
+                    {user?.name
+                      ?.split(" ")
+                      .map((word) => word[0])
+                      .join("")
+                      .toUpperCase()}
+                  </div>
+                  <p className="text-[14px] text-neutral-500 -mb-[6px]">
+                    {user?.name}
+                  </p>
+                  <p className="text-[11px] text-neutral-600">{user?.email}</p>
+                </div>
+
+                <ul className="mt-4">
+                  <li>
+                    <HiShoppingBag />
+                    <p>orders</p>
+                  </li>
+                  <li onClick={logout}>
+                    <RiLogoutCircleLine />
+                    <p>logout</p>
+                  </li>
+                </ul>
+              </div>
             </div>
           )}
         </div>
