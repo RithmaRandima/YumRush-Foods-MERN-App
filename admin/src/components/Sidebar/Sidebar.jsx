@@ -13,7 +13,7 @@ const Sidebar = () => {
       {/* side bar top part */}
       <div className="flex flex-col items-center">
         {/* add image after add authorization */}
-        <img src="" alt="" />
+        <h1>hi</h1>
         <FaUserCircle className="text-amber-300 text-[50px]" />
         <h1 className="text-[20px] font-extralight tracking-[2px]">
           rithma randima
@@ -33,7 +33,7 @@ const Sidebar = () => {
         {/* option 02 */}
         <NavLink to={"/list"} className="sidebar-option">
           <SlList className="text-[20px] font-extrabold" />
-          <p className="font-bold text-[12px] tracking-[1px]">List icon</p>
+          <p className="font-bold text-[12px] tracking-[1px]">List items</p>
         </NavLink>
 
         {/* option 03 */}

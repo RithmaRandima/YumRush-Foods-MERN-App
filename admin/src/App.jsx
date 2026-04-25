@@ -12,7 +12,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen">
-      <ToastContainer autoClose={500} />
+      <ToastContainer autoClose={1000} />
       <Navbar />
       <hr />
       {/* app container */}
