@@ -10,19 +10,54 @@ const StoreContextProvider = (props) => {
   const [food_list, setFoodList] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
   const [user, setUser] = useState({});
+
   // add to cart function
-  const addToCart = (itemID) => {
+  const addToCart = async (itemID) => {
+    const previousCart = { ...cartItems };
+
     if (!cartItems[itemID]) {
       setCartItems((prev) => ({ ...prev, [itemID]: 1 }));
     } else {
       setCartItems((prev) => ({ ...prev, [itemID]: prev[itemID] + 1 }));
     }
+
+    if (token) {
+      try {
+        await axios.post(
+          `${url}/api/cart/add`,
+          { itemId: itemID },
+          { headers: { token } },
+        );
+      } catch (error) {
+        // rollback UI if API fails
+        setCartItems(previousCart);
+        console.log("Add to cart failed", error);
+      }
+    }
   };
 
   // remove to cart function
 
-  const removeFromCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+  const removeFromCart = async (itemId) => {
+    setCartItems((prev) => {
+      const updated = { ...prev };
+
+      if (updated[itemId] > 1) {
+        updated[itemId] -= 1;
+      } else {
+        delete updated[itemId];
+      }
+
+      return updated;
+    });
+
+    if (token) {
+      await axios.post(
+        `${url}/api/cart/remove`,
+        { itemId }, // ✅ correct field
+        { headers: { token } },
+      );
+    }
   };
 
   // cart total
