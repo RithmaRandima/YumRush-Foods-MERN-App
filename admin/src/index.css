@@ -17,3 +17,14 @@ hr {
   height: 1px;
   background-color: #a9a9a9;
 }
+
+/* hide-scrollbar.css */
+.hide-scrollbar {
+  overflow-y: scroll; /* still scrollable */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge old */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}

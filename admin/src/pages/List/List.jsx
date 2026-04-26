@@ -72,7 +72,7 @@ const List = ({ url }) => {
 
         {currentItems.map((item, index) => (
           <div
-            className="list-table-format text-center hover:shadow-[1px_1px_1px_rgba(251,191,36,0.05)] rounded-2xl bg-[#fcd34d06] py-2 pl-4 hover:-translate-y-1 transition duration-200 pr-3 my-3 relative"
+            className="list-table-format text-center hover:shadow-[1px_1px_1px_rgba(251,191,36,0.05)] rounded-2xl bg-[#0f0f0f] py-2 pl-4 hover:-translate-y-1 transition duration-200 pr-3 my-3 relative"
             key={item._id}
           >
             <img
