@@ -1,5 +1,4 @@
-import { config } from "dotenv";
-config();
+import "./config/env.js";
 
 import express from "express";
 import cors from "cors";
@@ -7,6 +6,7 @@ import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRoutes.js";
 import userRouter from "./routes/userRouts.js";
 import cartRouter from "./routes/cartRoutes.js";
+import orderRouter from "./routes/orderRoutes.js";
 
 // app config
 const app = express();
@@ -24,7 +24,10 @@ app.get("/", (req, res) => {
 app.use("/api/food", foodRouter);
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/order", orderRouter);
 app.use("/images", express.static("uploads"));
+
+console.log(process.env.STRIPE_SECRET_KEY);
 
 // connect db
 connectDB().then(() => {
