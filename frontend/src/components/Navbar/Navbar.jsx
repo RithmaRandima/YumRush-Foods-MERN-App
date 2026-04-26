@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
@@ -6,9 +6,15 @@ import { GiForkKnifeSpoon } from "react-icons/gi";
 import { HiShoppingBag } from "react-icons/hi2";
 import { RiLogoutCircleLine } from "react-icons/ri";
 const Navbar = () => {
-  const [menu, setMenu] = useState("home");
-  const { getTotalCartAmount, token, setToken, setShowLogin, user } =
-    useContext(StoreContext);
+  const {
+    getTotalCartAmount,
+    token,
+    setToken,
+    setShowLogin,
+    user,
+    menu,
+    setMenu,
+  } = useContext(StoreContext);
 
   const navigate = useNavigate();
   const logout = () => {
@@ -31,33 +37,39 @@ const Navbar = () => {
           </div>
         </Link>
 
-        {/* middle */}
-        <ul className="navbar-menu flex list-none gap-13 text-white uppercase tracking-[3px] text-[12px] font-extralight p-3">
+        <ul className="navbar-menu flex list-none gap-14 text-white uppercase tracking-[3px] text-[12px] font-extralight p-3">
           <Link
-            to={"/"}
+            to="/"
             onClick={() => setMenu("home")}
-            className={menu === "home" ? "pb-2 border-b-1 " : ""}
+            className={`relative pb-1 transition-all duration-300
+      after:content-[''] after:absolute after:left-0 after:-bottom-1
+      after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300
+      after:w-0 hover:after:w-full
+      ${menu === "home" ? "after:w-full" : ""}`}
           >
             Home
           </Link>
+
           <Link
-            to={"/menu"}
+            to="/menu"
             onClick={() => setMenu("menu")}
-            className={menu === "menu" ? "pb-2 border-b-2 " : ""}
+            className={`relative pb-1 transition-all duration-300
+      after:content-[''] after:absolute after:left-0 after:-bottom-1
+      after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300
+      after:w-0 hover:after:w-full
+      ${menu === "menu" ? "after:w-full" : ""}`}
           >
             Menu
           </Link>
-          <a
-            href="#app-download"
-            onClick={() => setMenu("mobile-app")}
-            className={menu === "mobile-app" ? "pb-2 border-b-2 " : ""}
-          >
-            App
-          </a>
+
           <a
             href="#footer"
             onClick={() => setMenu("contact us")}
-            className={menu === "contact us" ? "pb-2 border-b-2 " : ""}
+            className={`relative pb-1 transition-all duration-300
+      after:content-[''] after:absolute after:left-0 after:-bottom-1
+      after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300
+      after:w-0 hover:after:w-full
+      ${menu === "contact us" ? "after:w-full" : ""}`}
           >
             Contact us
           </a>
@@ -110,7 +122,7 @@ const Navbar = () => {
               </div>
 
               {/* Dropdown */}
-              <div className="absolute right-0 mt-3 w-50 bg-neutral-900 border border-neutral-800 rounded-xl shadow-xl opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50">
+              <div className="absolute right-0 mt-3 w-45 bg-neutral-900 border border-neutral-800 rounded-xl shadow-xl opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50">
                 {/* User Info */}
                 <div className="flex flex-col items-center py-4 border-b border-neutral-800">
                   <div className="w-12 h-12 flex items-center justify-center border-2 border-amber-400 text-amber-400 font-bold rounded-full mb-2">
@@ -128,7 +140,10 @@ const Navbar = () => {
                 {/* Menu */}
                 <ul className="py-2 text-sm">
                   <li
-                    onClick={() => navigate("/myorders")}
+                    onClick={() => {
+                      navigate("/myorders");
+                      setMenu("order");
+                    }}
                     className="flex items-center gap-3 px-4 py-2 text-gray-300  hover:bg-gray-800 hover:text-white cursor-pointer transition"
                   >
                     <HiShoppingBag />

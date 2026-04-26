@@ -7,6 +7,7 @@ import { SlList } from "react-icons/sl";
 import { FaOpencart } from "react-icons/fa";
 import { RiUserSettingsFill } from "react-icons/ri";
 import { IoSettings } from "react-icons/io5";
+import { BiSolidBarChartSquare } from "react-icons/bi";
 const Sidebar = () => {
   return (
     <div className="sidebar relative bg-[#151515] text-white rounded-2xl w-[18%] h-[85vh] ml-3 flex flex-col items-center py-5">
@@ -23,8 +24,12 @@ const Sidebar = () => {
         </p>
       </div>
       {/* sidebar options */}
-      <div className="sidebar-options flex flex-col gap-3 mt-6 px-4  w-full">
+      <div className="sidebar-options flex flex-col gap-3 mt-6 px-6  w-full">
         {/* option 01 */}
+        <NavLink to={"/"} className="sidebar-option  hover:bg-amber-300">
+          <BiSolidBarChartSquare className="text-[20px] font-extrabold" />
+          <p className="font-bold text-[12px] tracking-[1px]">Dashboard</p>
+        </NavLink>
         <NavLink to={"/add"} className="sidebar-option  hover:bg-amber-300">
           <TbPlaylistAdd className="text-[20px] font-extrabold" />
           <p className="font-bold text-[12px] tracking-[1px]">Add Item</p>
@@ -41,16 +46,19 @@ const Sidebar = () => {
           <FaOpencart className="text-[20px] font-extrabold" />
           <p className="font-bold text-[12px] tracking-[1px]">Orders</p>
         </NavLink>
+
+        <button to={"/orders"} className="sidebar-option">
+          <FaOpencart className="text-[20px] font-extrabold" />
+          <p className="font-bold text-[12px] tracking-[1px]">Logout</p>
+        </button>
       </div>
 
       {/* helo center */}
-      <div className="absolute text-white text-right bg-[#0f0f0f] bottom-0 right-0 rounded-tl-full p-4 pr-5">
-        <p className="text-[20px] my-2">help center </p>
-        <p className="text-[12px] font-extralight tracking-[1px]">
-          have problem
-        </p>
-        <button className="mt-3" title="go to help center">
-          <IoSettings className="text-[30px] animate-spin [animation-duration:4000ms] text-amber-300 active:text-amber-400 cursor-pointer" />
+      <div className="absolute text-white text-right bg-[#0f0f0f] bottom-0 right-0 rounded-tl-full p-4 pb-0 pr-5">
+        <p className="text-[20px]">help center </p>
+        <p className="text-[10px] my-1 ">having a problem</p>
+        <button className="mt" title="go to help center">
+          <IoSettings className="text-[24px] animate-spin [animation-duration:4000ms] text-amber-300 active:text-amber-400 cursor-pointer" />
         </button>
       </div>
     </div>

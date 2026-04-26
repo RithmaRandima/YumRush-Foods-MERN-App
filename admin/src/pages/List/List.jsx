@@ -56,7 +56,7 @@ const List = ({ url }) => {
   };
 
   return (
-    <div className="list w-[80%] text-white text-[16px] bg-[#151515] rounded-2xl pl-10 p-3 pb-10 overflow-y-auto flex-1 m-3 mb-5">
+    <div className="list w-[80%] h-[80vh] hide-scrollbar text-white text-[16px] bg-[#151515] rounded-2xl pl-10 p-3 pb-10 overflow-y-auto flex-1 m-3 mb-5">
       <p className="text-[20px] text-amber-300 tracking-[3px] my-5">
         All Foods List ({list.length})
       </p>

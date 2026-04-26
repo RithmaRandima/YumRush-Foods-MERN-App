@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./FoodItem.css";
 import { FaMinus, FaPlus, FaStar } from "react-icons/fa";
 import { StoreContext } from "../../context/StoreContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LoginPopup from "../LoginPopup/LoginPopup";
 
 const FoodItem = ({ id, name, price, description, image }) => {
@@ -10,7 +10,6 @@ const FoodItem = ({ id, name, price, description, image }) => {
     useContext(StoreContext);
 
   console.log(token);
-  const navigate = useNavigate();
 
   return (
     <Link
@@ -37,12 +36,12 @@ const FoodItem = ({ id, name, price, description, image }) => {
                 }
                 addToCart(id);
               }}
-              className="w-7 h-7 bg-black rounded-full hover:scale-105 duration-300"
+              className="w-6 h-6 bg-black rounded-full hover:scale-105 duration-300"
             >
               <FaPlus className="text-[10px] mx-auto text-white" />
             </button>
           ) : (
-            <div className="flex text-white items-center gap-1.5 bg-white/20 rounded-full">
+            <div className="flex text-white items-center gap-1.5 bg-white/20 p-0.5 rounded-full">
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -53,9 +52,9 @@ const FoodItem = ({ id, name, price, description, image }) => {
                   }
                   removeFromCart(id);
                 }}
-                className="w-6 h-6 bg-black rounded-full hover:scale-105 duration-300"
+                className="w-5 h-5 bg-black rounded-full hover:scale-105 duration-300"
               >
-                <FaMinus className="text-[10px] mx-auto" />
+                <FaMinus className="text-[9px] mx-auto" />
               </button>
               <p className="text-black text-[16px] font-extrabold">
                 {cartItems[id]}
@@ -67,9 +66,9 @@ const FoodItem = ({ id, name, price, description, image }) => {
 
                   addToCart(id);
                 }}
-                className="w-6 h-6 bg-black rounded-full hover:scale-105 duration-300"
+                className="w-5 h-5 bg-black rounded-full hover:scale-105 duration-300"
               >
-                <FaPlus className="text-[10px] mx-auto" />
+                <FaPlus className="text-[9px] mx-auto" />
               </button>
             </div>
           )}
@@ -85,7 +84,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
         </p>
 
         <div className="flex justify-between items-center">
-          <p className="text-[16px] font-extralight tracking-[3px]">{name}</p>
+          <p className="text-[15px] font-extralight tracking-[3px]">{name}</p>
           <div className="flex text-[12px] gap-0.5 text-amber-400">
             <FaStar />
             <FaStar />

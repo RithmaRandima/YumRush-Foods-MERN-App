@@ -7,6 +7,7 @@ import foodRouter from "./routes/foodRoutes.js";
 import userRouter from "./routes/userRouts.js";
 import cartRouter from "./routes/cartRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
+import adminRouter from "./routes/adminRoutes.js";
 
 // app config
 const app = express();
@@ -25,6 +26,7 @@ app.use("/api/food", foodRouter);
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
+app.use("/api/admin", adminRouter);
 app.use("/images", express.static("uploads"));
 
 // connect db

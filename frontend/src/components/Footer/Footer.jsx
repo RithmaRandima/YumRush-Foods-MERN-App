@@ -10,13 +10,13 @@ import {
 
 const Footer = () => {
   return (
-    <div
-      className="text-[#d9d9d9] bg-[#0f0f0f] flex flex-col items-center gap-5 p-20 pb-5"
+    <footer
+      className="text-[#d9d9d9] bg-[#0f0f0f] flex flex-col items-center gap-10 p-10 pb-5"
       id="footer"
     >
       {/* content */}
-      <div className="w-full grid grid-cols-4 gap-20 items-start">
-        {/*Footer col 1 Content */}
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16 items-start">
+        {/* Column 1 - Brand */}
         <div className="flex flex-col items-start gap-5">
           <div className="relative text-amber-300">
             <h1 className="text-amber-300 tracking-[4px] font-extralight text-[35px]">
@@ -24,11 +24,15 @@ const Footer = () => {
             </h1>
             <GiForkKnifeSpoon className="absolute -right-11 -bottom-0 text-[60px]" />
           </div>
+
+          <p className="text-gray-500 text-[14px] leading-relaxed">
+            Fast, fresh, and delicious food delivered to your doorstep.
+          </p>
         </div>
 
-        {/*Footer col 2 Content */}
-        <div className="center">
-          <h2 className="tracking-[3px] mb-4">LOCATION</h2>
+        {/* Column 2 - Location */}
+        <div>
+          <h2 className="tracking-[3px] mb-4 text-white">LOCATION</h2>
           <div className="text-gray-500 text-[15px]">
             <p className="mb-1">732/21 Second Street</p>
             <p className="mb-1">Manchester, Kung Street</p>
@@ -36,44 +40,50 @@ const Footer = () => {
           </div>
         </div>
 
-        {/*Footer col 3 Content */}
-        <div className="center">
-          <h2 className="tracking-[3px] mb-4">COMPANY</h2>
-          <ul className="list-none cursor-pointer text-gray-500 text-[15px]">
-            <li className="mb-1">Home</li>
-            <li className="mb-1">About Us</li>
-            <li className="mb-1">Delivery</li>
-            <li className="mb-1">Privacy Policy</li>
+        {/* Column 3 - Company */}
+        <div>
+          <h2 className="tracking-[3px] mb-4 text-white">COMPANY</h2>
+          <ul className="text-gray-500 text-[15px] space-y-1 cursor-pointer">
+            <li className="hover:text-amber-300 transition">Home</li>
+            <li className="hover:text-amber-300 transition">About Us</li>
+            <li className="hover:text-amber-300 transition">Delivery</li>
+            <li className="hover:text-amber-300 transition">Privacy Policy</li>
           </ul>
         </div>
 
-        {/*Footer col 4 Content */}
-        <div className="right">
-          <h2 className="tracking-[3px] mb-4">GET IN TOUCH</h2>
-          <ul className="list-none">
-            <div className="text-gray-500 text-[15px]">
-              <p className="mb-1">+1-222-345-6786</p>
-              <p className="mb-1">contact@gmail.com</p>
-              <p className="uppercase tracking-[2px] my-5 text-white cursor-pointer font-bold">
-                Make Reservation
-              </p>
-            </div>
+        {/* Column 4 - Contact */}
+        <div>
+          <h2 className="tracking-[3px] mb-4 text-white">GET IN TOUCH</h2>
+
+          <ul className="text-gray-500 text-[15px] space-y-1">
+            <li>+1-222-345-6786</li>
+            <li>contact@gmail.com</li>
           </ul>
+
+          {/* CTA Link */}
+          <a
+            href="/menu"
+            className="inline-block mt-4 uppercase tracking-[2px] text-white font-semibold text-[14px] hover:text-amber-300 transition-colors duration-200"
+          >
+            Browse Menu
+          </a>
         </div>
       </div>
-      {/* copy right */}
-      {/* icons */}
-      <div className="flex mt-7 gap-7 text-white/50 text-[22px]">
-        <FaFacebook className="hover:scale-110 hover:text-amber-300 duration-200" />
-        <FaInstagram className="hover:scale-110 hover:text-amber-300 duration-200" />
-        <FaTwitter className="hover:scale-110 hover:text-amber-300 duration-200" />
-        <FaGooglePlus className="hover:scale-110 hover:text-amber-300 duration-200" />
-        <FaMap className="hover:scale-110 hover:text-amber-300 duration-200" />
+
+      {/* Social Icons */}
+      <div className="flex mt-5 gap-6 text-white/50 text-[22px]">
+        <FaFacebook className="hover:scale-110 hover:text-amber-300 duration-200 cursor-pointer" />
+        <FaInstagram className="hover:scale-110 hover:text-amber-300 duration-200 cursor-pointer" />
+        <FaTwitter className="hover:scale-110 hover:text-amber-300 duration-200 cursor-pointer" />
+        <FaGooglePlus className="hover:scale-110 hover:text-amber-300 duration-200 cursor-pointer" />
+        <FaMap className="hover:scale-110 hover:text-amber-300 duration-200 cursor-pointer" />
       </div>
-      <p className="font-bold tracking-[3px] text-[10px] my-4">
+
+      {/* Copyright */}
+      <p className="font-bold tracking-[3px] text-[10px] my-4 text-center text-gray-500">
         &copy; 2026 YumRush Restaurant. All rights reserved.
       </p>
-    </div>
+    </footer>
   );
 };
 

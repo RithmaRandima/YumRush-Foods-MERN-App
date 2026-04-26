@@ -28,7 +28,11 @@ const OrderItem = ({ order }) => {
 
         {/* Status */}
         <p className="mt-2 text-sm text-gray-300 font-medium flex items-center gap-2">
-          <span className="text-green-500 text-lg">&#x25cf;</span>
+          <span
+            className={`${order?.status === "Food Processing" ? "text-yellow-300" : "text-green-300"}  text-lg`}
+          >
+            &#x25cf;
+          </span>
           {order?.status}
         </p>
       </div>
