@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./PlaceOrder.css";
 import { StoreContext } from "../../context/StoreContext";
 import CartTotalSection from "../../components/CartTotalSection.jsx/CartTotalSection";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
   const {
@@ -69,6 +70,14 @@ const PlaceOrder = () => {
       alert(res.data.message || "Order failed");
     }
   };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/cart");
+    }
+  }, [token]);
 
   return (
     <form

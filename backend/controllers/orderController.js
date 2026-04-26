@@ -64,6 +64,7 @@ export const placeOrder = async (req, res) => {
   }
 };
 
+// verify payments
 export const verifyOrder = async (req, res) => {
   const { orderId, success } = req.body;
 
@@ -80,6 +81,21 @@ export const verifyOrder = async (req, res) => {
     res.json({
       success: false,
       message: "Error Veryfying order",
+    });
+  }
+};
+
+// user orders for frontend
+export const userOrders = async (req, res) => {
+  try {
+    const orders = await orderModel.find({ userId: req.userId });
+
+    res.json({ success: true, data: orders });
+  } catch (error) {
+    console.error(error);
+    res.json({
+      success: false,
+      message: "Error getting orders",
     });
   }
 };

@@ -99,37 +99,48 @@ const Navbar = () => {
               sign in
             </button>
           ) : (
-            <div className="navbar-profile">
-              <div className="w-[40px] h-[40px] flex items-center justify-center bg-amber-300 font-extrabold tracking-wide rounded-full">
+            <div className="relative group">
+              {/* Avatar */}
+              <div className="w-10 h-10 flex items-center justify-center bg-amber-400 text-black font-bold rounded-full cursor-pointer hover:scale-105 transition">
                 {user?.name
                   ?.split(" ")
                   .map((word) => word[0])
                   .join("")
                   .toUpperCase()}
               </div>
-              <div className="nav-profile-dropdown bg-[#0f0f0f]">
-                <div className="pt-2 flex justify-center flex-col items-center">
-                  <div className="w-[35px] h-[35px] flex items-center justify-center border-2 text-amber-300 font-extrabold tracking-wide rounded-full">
+
+              {/* Dropdown */}
+              <div className="absolute right-0 mt-3 w-50 bg-neutral-900 border border-neutral-800 rounded-xl shadow-xl opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50">
+                {/* User Info */}
+                <div className="flex flex-col items-center py-4 border-b border-neutral-800">
+                  <div className="w-12 h-12 flex items-center justify-center border-2 border-amber-400 text-amber-400 font-bold rounded-full mb-2">
                     {user?.name
                       ?.split(" ")
                       .map((word) => word[0])
                       .join("")
                       .toUpperCase()}
                   </div>
-                  <p className="text-[14px] text-neutral-500 -mb-[6px]">
-                    {user?.name}
-                  </p>
-                  <p className="text-[11px] text-neutral-600">{user?.email}</p>
+
+                  <p className="text-sm text-gray-200">{user?.name}</p>
+                  <p className="text-xs text-gray-400">{user?.email}</p>
                 </div>
 
-                <ul className="mt-4">
-                  <li>
+                {/* Menu */}
+                <ul className="py-2 text-sm">
+                  <li
+                    onClick={() => navigate("/myorders")}
+                    className="flex items-center gap-3 px-4 py-2 text-gray-300  hover:bg-gray-800 hover:text-white cursor-pointer transition"
+                  >
                     <HiShoppingBag />
-                    <p>orders</p>
+                    <span>Orders</span>
                   </li>
-                  <li onClick={logout}>
+
+                  <li
+                    onClick={logout}
+                    className="flex items-center gap-3 px-4 py-2 text-red-400 hover:bg-gray-800 hover:text-red-300 cursor-pointer transition"
+                  >
                     <RiLogoutCircleLine />
-                    <p>logout</p>
+                    <span>Logout</span>
                   </li>
                 </ul>
               </div>

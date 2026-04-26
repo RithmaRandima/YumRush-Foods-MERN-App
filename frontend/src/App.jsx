@@ -10,6 +10,7 @@ import Products from "./pages/Products/Products";
 import { useContext } from "react";
 import { StoreContext } from "./context/StoreContext";
 import Verify from "./pages/Verify/Verify";
+import MyOrders from "./pages/MyOrders/MyOrders";
 
 const App = () => {
   const { showLogin } = useContext(StoreContext);
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/menu" element={<Products />} />
           <Route path="/order" element={<PlaceOrder />} />
+          <Route path="/myorders" element={<MyOrders />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/food/:id" element={<FoodDetail />} />
         </Routes>

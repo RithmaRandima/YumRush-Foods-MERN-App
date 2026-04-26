@@ -27,8 +27,6 @@ app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 app.use("/images", express.static("uploads"));
 
-console.log(process.env.STRIPE_SECRET_KEY);
-
 // connect db
 connectDB().then(() => {
   app.listen(port, () => {
