@@ -122,8 +122,6 @@ const StoreContextProvider = (props) => {
     loadData();
   }, []);
 
-  console.log(user);
-
   // context values
   const contextValue = {
     food_list,
@@ -143,7 +141,6 @@ const StoreContextProvider = (props) => {
     setUser,
   };
 
-  console.log(user);
   return (
     <StoreContext.Provider value={contextValue}>
       {props.children}

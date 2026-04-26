@@ -2,8 +2,6 @@ import orderModel from "../models/oderModel.js";
 import userModel from "../models/userModel.js";
 import Stripe from "stripe";
 
-console.log(process.env.STRIPE_SECRET_KEY);
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 // placing user order for frontend
 export const placeOrder = async (req, res) => {
@@ -66,4 +64,22 @@ export const placeOrder = async (req, res) => {
   }
 };
 
-export const verifyOrder = async (req, res) => {};
+export const verifyOrder = async (req, res) => {
+  const { orderId, success } = req.body;
+
+  try {
+    if (success === "true") {
+      await orderModel.findByIdAndUpdate(orderId, { payment: true });
+      res.json({ success: true, message: "Paid" });
+    } else {
+      await orderModel.findByIdAndDelete(orderId);
+      res.json({ success: true, message: "Not Paid" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.json({
+      success: false,
+      message: "Error Veryfying order",
+    });
+  }
+};
