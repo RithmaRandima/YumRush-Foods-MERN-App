@@ -5,8 +5,7 @@ import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
 
 const LoginPopup = () => {
-  const { url, setToken, setUser } = useContext(StoreContext);
-  const { setShowLogin } = useContext(StoreContext);
+  const { url, setToken, setUser, setShowLogin } = useContext(StoreContext);
 
   const [currentState, setCurrentState] = useState("Login");
   const [data, setData] = useState({
@@ -37,7 +36,8 @@ const LoginPopup = () => {
     if (response.data.success) {
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
-      setUser(response.data.user);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      setUser(JSON.parse(localStorage.getItem("user")));
       setShowLogin(false);
     } else {
       alert(response.data.message);
@@ -74,7 +74,7 @@ const LoginPopup = () => {
             />
           )}
           <input
-            type="emai"
+            type="email"
             placeholder="your email"
             className="outline-none border border-[#c9c9c9]
             p-2.5 rounded-xl"

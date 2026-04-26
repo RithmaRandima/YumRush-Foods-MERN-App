@@ -105,14 +105,24 @@ const StoreContextProvider = (props) => {
   useEffect(() => {
     async function loadData() {
       await fetchFoodList();
-      if (localStorage.getItem("token")) {
-        setToken(localStorage.getItem("token"));
-        await loadCartData(localStorage.getItem("token"));
+
+      const savedToken = localStorage.getItem("token");
+      const savedUser = localStorage.getItem("user");
+
+      if (savedToken) {
+        setToken(savedToken);
+        await loadCartData(savedToken);
+      }
+
+      if (savedUser) {
+        setUser(JSON.parse(savedUser));
       }
     }
 
     loadData();
   }, []);
+
+  console.log(user);
 
   // context values
   const contextValue = {

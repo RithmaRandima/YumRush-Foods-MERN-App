@@ -8,11 +8,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 // placing user order for frontend
 export const placeOrder = async (req, res) => {
   try {
-    const { userId, items, amount, address } = req.body;
+    const { items, amount, address } = req.body;
 
     // 1. Create order in DB
     const newOrder = new orderModel({
-      userId,
+      userId: req.userId,
       items,
       amount,
       address,
@@ -20,7 +20,7 @@ export const placeOrder = async (req, res) => {
 
     await newOrder.save();
 
-    await userModel.findByIdAndUpdate(userId, { cartData: {} });
+    await userModel.findByIdAndUpdate(req.userId, { cartData: {} });
 
     // 2. Create Stripe line items
     const line_items = items.map((item) => ({
@@ -65,3 +65,5 @@ export const placeOrder = async (req, res) => {
     });
   }
 };
+
+export const verifyOrder = async (req, res) => {};
