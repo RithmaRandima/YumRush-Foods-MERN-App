@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Add.css";
 import { IoMdCloudUpload } from "react-icons/io";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { AdminContext } from "../../context/AdminContext";
 
 const Add = ({ url }) => {
+  const { fetchDashboard } = useContext(AdminContext);
   const [image, setImage] = useState(null);
 
   const [data, setData] = useState({
@@ -78,6 +80,7 @@ const Add = ({ url }) => {
           category: "Salad",
           ingredients: "",
         });
+        await fetchDashboard();
         setImage(null);
         toast.success(response.data.message);
         window.scrollTo(0, 0);
@@ -91,30 +94,32 @@ const Add = ({ url }) => {
   };
 
   return (
-    <div className="list w-[80%] h-[80vh] hide-scrollbar text-white text-[16px] bg-[#151515] rounded-2xl pl-10 p-3 pb-10 overflow-y-auto flex-1 m-3 mb-5">
-      <form
-        className="add-form gap-5 space-between"
-        onSubmit={onSubmitHandeler}
-      >
+    <div className="w-[80%] h-[80vh] overflow-y-auto hide-scrollbar text-white bg-[#121212] rounded-2xl p-6 m-3 border border-neutral-800 shadow-xl">
+      <form className="space-y-8" onSubmit={onSubmitHandeler}>
+        {/* HEADER */}
+        <div className="mb-2">
+          <h2 className="text-lg font-semibold text-white">Add New Product</h2>
+          <p className="text-xs text-gray-500">Create a new menu item</p>
+        </div>
+
         {/* IMAGE UPLOAD */}
-        <div className="add-img-upload space-between">
-          <p>Upload Image</p>
+        <div className="space-y-2">
+          <p className="text-sm text-gray-400">Product Image</p>
 
           <label
             htmlFor="image"
-            className="cursor-pointer bg-[#0f0f0f] text-amber-300/30 hover:text-amber-300/40 rounded-xs w-[105px] h-[60px] flex flex-col items-center justify-center"
+            className="group relative flex items-center justify-center w-32 h-20 rounded-xl border border-dashed border-neutral-700 bg-[#0f0f0f] cursor-pointer hover:border-amber-500/40 transition"
           >
             {image ? (
               <img
                 src={URL.createObjectURL(image)}
-                alt=""
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-xl"
               />
             ) : (
-              <>
-                <IoMdCloudUpload className="text-[26px]" />
-                <p className="text-[12px] font-semibold -mt-1">Upload</p>
-              </>
+              <div className="text-center text-gray-500 group-hover:text-amber-400 transition">
+                <IoMdCloudUpload className="text-2xl mx-auto mb-1" />
+                <p className="text-xs">Upload</p>
+              </div>
             )}
           </label>
 
@@ -127,93 +132,96 @@ const Add = ({ url }) => {
         </div>
 
         {/* NAME */}
-        <div className="add-product-name space-between my-3">
-          <p>Product Name</p>
+        <div className="space-y-2">
+          <p className="text-sm text-gray-400">Product Name</p>
           <input
             type="text"
             name="name"
-            placeholder="Enter Name Here"
-            onChange={onChangeHandler}
             value={data.name}
+            onChange={onChangeHandler}
+            placeholder="Enter product name"
+            className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 text-white placeholder-gray-600 focus:border-amber-500/40 focus:outline-none transition"
           />
         </div>
 
         {/* DESCRIPTIONS */}
-        <div className="flex gap-7.5 my-3">
-          <div className="add-product-description space-between">
-            <p>Short Description</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <p className="text-sm text-gray-400">Short Description</p>
             <textarea
               name="shortdescription"
-              rows={3}
-              placeholder="Write Content Here"
-              onChange={onChangeHandler}
               value={data.shortdescription}
+              onChange={onChangeHandler}
+              rows={3}
+              className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 text-white placeholder-gray-600 focus:border-amber-500/40 focus:outline-none transition"
             />
           </div>
 
-          <div className="add-product-description space-between">
-            <p>Product Description</p>
+          <div className="space-y-2">
+            <p className="text-sm text-gray-400">Long Description</p>
             <textarea
               name="longdescription"
-              rows={5}
-              placeholder="Write Content Here"
-              onChange={onChangeHandler}
               value={data.longdescription}
+              onChange={onChangeHandler}
+              rows={3}
+              className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 text-white placeholder-gray-600 focus:border-amber-500/40 focus:outline-none transition"
             />
           </div>
         </div>
 
         {/* CATEGORY + PRICE */}
-        <div className="add-category-price">
-          <div className="add-category space-between">
-            <p>Product Category</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <p className="text-sm text-gray-400">Category</p>
             <select
-              onChange={onChangeHandler}
               name="category"
               value={data.category}
-              className="bg-[#0f0f0f] rounded-full"
+              onChange={onChangeHandler}
+              className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 text-white focus:border-amber-500/40 outline-none"
             >
-              <option value="Salad">Salad</option>
-              <option value="Rolls">Rolls</option>
-              <option value="Deserts">Deserts</option>
-              <option value="Sandwich">Sandwich</option>
-              <option value="Cake">Cake</option>
-              <option value="Pure Veg">Pure Veg</option>
-              <option value="Pasta">Pasta</option>
-              <option value="Noodles">Noodles</option>
+              <option>Salad</option>
+              <option>Rolls</option>
+              <option>Deserts</option>
+              <option>Sandwich</option>
+              <option>Cake</option>
+              <option>Pure Veg</option>
+              <option>Pasta</option>
+              <option>Noodles</option>
             </select>
           </div>
 
-          <div className="add-price space-between">
-            <p>Product Price</p>
+          <div className="space-y-2">
+            <p className="text-sm text-gray-400">Price</p>
             <input
-              onChange={onChangeHandler}
-              value={data.price}
-              type="number" // ✅ fixed
+              type="number"
               name="price"
-              placeholder="$20"
+              value={data.price}
+              onChange={onChangeHandler}
+              placeholder="0.00"
+              className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 text-white placeholder-gray-600 focus:border-amber-500/40 focus:outline-none transition"
             />
           </div>
         </div>
 
         {/* INGREDIENTS */}
-        <div className="add-infredients space-between my-3">
-          <p>Product Ingredients</p>
+        <div className="space-y-2">
+          <p className="text-sm text-gray-400">Ingredients</p>
           <input
             type="text"
             name="ingredients"
-            placeholder="Enter Ingredients (e.g. Tomato, Cheese)"
-            onChange={onChangeHandler}
             value={data.ingredients}
+            onChange={onChangeHandler}
+            placeholder="Tomato, Cheese, Onion..."
+            className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 text-white placeholder-gray-600 focus:border-amber-500/40 focus:outline-none transition"
           />
         </div>
 
         {/* BUTTON */}
         <button
-          className="border border-amber-300 w-fit p-2 px-8 mt-4 tracking-[3px] text-[12px] font-bold hover:bg-amber-300 hover:text-black cursor-pointer duration-200 hover:-translate-y-1"
           type="submit"
+          className="px-6 py-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:bg-amber-500/20 transition font-medium"
         >
-          ADD
+          Add Product
         </button>
       </form>
     </div>

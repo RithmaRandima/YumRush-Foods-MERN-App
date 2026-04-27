@@ -1,30 +1,42 @@
 import React, { useContext } from "react";
-import "./Navbar.css";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { AdminContext } from "../../context/AdminContext";
 
 const Navbar = () => {
   const { admin } = useContext(AdminContext);
+
   return (
-    <div className="flex py-6 justify-between items-center px-[4%] bg-gradient-to-t from-black to-black/95 ">
-      {/* logo */}
-      <div>
-        <div className="relative text-amber-300">
-          <h1 className="text-amber-300 tracking-[4px] font-extralight text-[13px]">
-            YumRush
-          </h1>
-          <GiForkKnifeSpoon className="absolute -right-7 -bottom-0 text-[30px]" />
+    <div className="flex items-center justify-between px-[4%] py-4 bg-gradient-to-b from-[#0f0f0f] to-[#0b0b0b] border-b border-neutral-800">
+      {/* LOGO */}
+      <div className="flex items-center gap-2 text-amber-400">
+        <div className="relative">
+          <h1 className="text-[14px] tracking-[4px] font-light">YumRush</h1>
+          <GiForkKnifeSpoon className="absolute -right-6 -bottom-1 text-[26px]" />
         </div>
       </div>
 
-      {/* user img */}
-      <div>
-        <p className="text-white text-[12px] font-semibold">
-          Welcome,{" "}
-          <span className="text-[17px] font-bold text-amber-400 tracking-[1px]">
-            {admin?.name}
-          </span>
-        </p>
+      {/* RIGHT SIDE */}
+      <div className="flex items-center gap-6">
+        {/* SYSTEM STATUS (moved here) */}
+        <div className="hidden sm:flex items-center gap-2 text-xs text-gray-400">
+          <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+          System Active
+        </div>
+
+        {/* USER */}
+        <div className="flex items-center gap-3">
+          <div className="text-right">
+            <p className="text-[11px] text-gray-500">Welcome</p>
+            <p className="text-sm font-semibold text-white leading-tight">
+              {admin?.name || "Admin"}
+            </p>
+          </div>
+
+          {/* avatar */}
+          <div className="w-9 h-9 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-semibold text-sm">
+            {admin?.name?.charAt(0) || "A"}
+          </div>
+        </div>
       </div>
     </div>
   );

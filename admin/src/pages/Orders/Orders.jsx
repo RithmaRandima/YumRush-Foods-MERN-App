@@ -6,15 +6,22 @@ import OrderItem from "../../components/OrderItem/OrderItem";
 
 const Orders = ({ url }) => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const getAllOrders = async () => {
     try {
+      setLoading(true);
+
       const res = await axios.get(`${url}/api/order/list`);
+
       if (res.data.success) {
         setData(res.data.data);
       }
     } catch (error) {
-      toast.error("Error Fetching Orders.");
-      console.log("error on getAllOrder function", error);
+      toast.error("Error fetching orders");
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -22,16 +29,43 @@ const Orders = ({ url }) => {
     getAllOrders();
   }, []);
 
-  console.log(data);
   return (
-    <div className="list w-[80%] h-[80vh] text-white text-[16px] bg-[#151515] rounded-2xl pl-10 p-3 pb-10 overflow-y-auto flex-1 m-3 mb-5 hide-scrollbar">
-      <p className="text-[20px] text-amber-300 tracking-[3px] my-5">
-        All Orders ({data.length})
-      </p>
-      {/* Orders List */}
+    <div className="w-[80%] h-[80vh] text-white bg-[#151515] rounded-2xl p-5 overflow-y-auto flex-1 m-3 mb-5 hide-scrollbar">
+      {/* HEADER */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-[20px] font-semibold text-white tracking-wide">
+            All Orders
+          </h2>
+          <p className="text-xs text-gray-500 mt-1">
+            Manage and track customer orders
+          </p>
+        </div>
+
+        <div className="text-xs text-gray-400 bg-[#0f0f0f] px-3 py-1 rounded-full border border-neutral-800">
+          Total: {data.length}
+        </div>
+      </div>
+
+      {/* LOADING STATE */}
+      {loading && (
+        <div className="text-gray-400 text-sm animate-pulse">
+          Loading orders...
+        </div>
+      )}
+
+      {/* EMPTY STATE */}
+      {!loading && data.length === 0 && (
+        <div className="text-center py-10 text-gray-500">No orders found</div>
+      )}
+
+      {/* ORDERS LIST */}
       <div className="space-y-4">
-        {data.map((order, index) => (
-          <div key={index} className=" px-4 py-1 ">
+        {data.map((order) => (
+          <div
+            key={order._id}
+            className="transition hover:-translate-y-1 duration-200"
+          >
             <OrderItem order={order} />
           </div>
         ))}

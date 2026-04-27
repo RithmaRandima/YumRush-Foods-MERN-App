@@ -56,66 +56,88 @@ const List = ({ url }) => {
   };
 
   return (
-    <div className="list w-[80%] h-[80vh] hide-scrollbar text-white text-[16px] bg-[#151515] rounded-2xl pl-10 p-3 pb-10 overflow-y-auto flex-1 m-3 mb-5">
-      <p className="text-[20px] text-amber-300 tracking-[3px] my-5">
-        All Foods List ({list.length})
-      </p>
-
-      <div className="list-table">
-        <div className="list-table-format title text-center">
-          <b>Image</b>
-          <b>Name</b>
-          <b>Category</b>
-          <b>Price</b>
-          <b>Action</b>
+    <div className="w-[80%] h-[80vh] overflow-y-auto hide-scrollbar bg-[#121212] text-white rounded-2xl border border-neutral-800 shadow-xl p-6 m-3">
+      {/* HEADER */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-lg font-semibold text-white">Food Items</h2>
+          <p className="text-xs text-gray-500">
+            Total {list.length} products available
+          </p>
         </div>
+      </div>
 
-        {currentItems.map((item, index) => (
+      {/* TABLE HEADER */}
+      <div className="grid grid-cols-5 text-xs text-gray-500 uppercase px-4 py-3 bg-[#161616] rounded-xl border border-neutral-800">
+        <span>Image</span>
+        <span>Name</span>
+        <span>Category</span>
+        <span>Price</span>
+        <span className="text-center">Action</span>
+      </div>
+
+      {/* LIST */}
+      <div className="mt-4 space-y-3">
+        {currentItems.map((item) => (
           <div
-            className="list-table-format text-center hover:shadow-[1px_1px_1px_rgba(251,191,36,0.05)] rounded-2xl bg-[#0f0f0f] py-2 pl-4 hover:-translate-y-1 transition duration-200 pr-3 my-3 relative"
             key={item._id}
+            className="grid grid-cols-5 items-center px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 hover:border-amber-500/30 hover:bg-[#141414] transition group"
           >
-            <img
-              src={`${url}/images/${item.image}`}
-              alt=""
-              className="h-20 w-full object-cover"
-            />
-            <p className="absolute top-4 left-24 w-5 h-5 bg-white text-black font-bold rounded-full text-[10px] flex items-center justify-center">
-              {index + 1}
+            {/* IMAGE */}
+            <div className="flex items-center gap-3">
+              <img
+                src={`${url}/images/${item.image}`}
+                className="w-12 h-12 rounded-lg object-cover border border-neutral-800 group-hover:scale-105 transition"
+              />
+            </div>
+
+            {/* NAME */}
+            <p className="text-sm text-gray-300 group-hover:text-white transition truncate">
+              {item.name}
             </p>
-            <p>{item.name}</p>
-            <p>{item.category}</p>
-            <p>{item.price}</p>
-            <div
-              className="flex items-center justify-center hover:scale-105 hover:text-red-500 duration-200 cursor-pointer"
-              onClick={() => removeFood(item._id)}
-            >
-              <FaTrash />
+
+            {/* CATEGORY */}
+            <p className="text-sm text-gray-400">{item.category}</p>
+
+            {/* PRICE */}
+            <p className="text-sm font-medium text-emerald-400">
+              ${Number(item.price).toFixed(2)}
+            </p>
+
+            {/* ACTION */}
+            <div className="flex justify-center">
+              <button
+                onClick={() => removeFood(item._id)}
+                className="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition"
+              >
+                <FaTrash />
+              </button>
             </div>
           </div>
         ))}
       </div>
 
-      {/* pagination controls */}
-      <div className="flex items-center justify-center gap-4 mt-10 text-amber-300">
+      {/* PAGINATION */}
+      <div className="flex items-center justify-center gap-4 mt-8">
         <button
           onClick={prevPage}
           disabled={currentPage === 1}
-          className="w-7 h-7 rounded-full flex items-center justify-center bg-amber-300 disabled:opacity-40"
+          className="w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 disabled:opacity-30 transition"
         >
-          <MdKeyboardArrowLeft size={25} className="text-black font-bold" />
+          <MdKeyboardArrowLeft size={22} />
         </button>
 
-        <span className="text-[14px]">
-          Page {currentPage} of {totalPages || 1}
+        <span className="text-xs text-gray-400">
+          Page <span className="text-white">{currentPage}</span> of{" "}
+          {totalPages || 1}
         </span>
 
         <button
           onClick={nextPage}
           disabled={currentPage === totalPages}
-          className="w-7 h-7 rounded-full flex items-center justify-center bg-amber-300 disabled:opacity-40"
+          className="w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 disabled:opacity-30 transition"
         >
-          <MdKeyboardArrowRight size={25} className="text-black font-bold" />
+          <MdKeyboardArrowRight size={22} />
         </button>
       </div>
     </div>

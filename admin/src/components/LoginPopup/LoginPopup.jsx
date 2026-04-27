@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useContext } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { AdminContext } from "../../context/AdminContext";
 import { toast } from "react-toastify";
+import { IoClose } from "react-icons/io5";
 
 const LoginPopup = () => {
   const { url, setToken, setAdmin } = useContext(AdminContext);
@@ -14,115 +14,129 @@ const LoginPopup = () => {
     password: "",
   });
 
-  const onChangeHandeler = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-
-    setData((data) => ({ ...data, [name]: value }));
+  const onChangeHandler = (e) => {
+    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const onLogin = async (event) => {
-    event.preventDefault();
-    let newUrl = url;
+  const onLogin = async (e) => {
+    e.preventDefault();
 
-    if (currentState === "Login") {
-      newUrl += `/api/user/login`;
-    } else {
-      newUrl += `/api/user/register`;
-    }
+    try {
+      let newUrl =
+        currentState === "Login"
+          ? `${url}/api/user/login`
+          : `${url}/api/user/register`;
 
-    const response = await axios.post(newUrl, data);
+      const response = await axios.post(newUrl, data);
 
-    if (response.data.success) {
-      setToken(response.data.token);
-      localStorage.setItem("adminToken", response.data.token);
-      localStorage.setItem("admin", JSON.stringify(response.data.user));
-      setAdmin(JSON.parse(localStorage.getItem("admin")));
-    } else {
-      toast.error(response.data.message);
+      if (response.data.success) {
+        setToken(response.data.token);
+        localStorage.setItem("adminToken", response.data.token);
+        localStorage.setItem("admin", JSON.stringify(response.data.user));
+        setAdmin(response.data.user);
+
+        toast.success(
+          currentState === "Login"
+            ? "Welcome back!"
+            : "Account created successfully",
+        );
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error("Server error");
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 w-full h-screen  bg-black/50 backdrop-blur-[4px] flex justify-center items-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md">
       <form
         onSubmit={onLogin}
-        className="w-[30%] max-w-lg bg-white rounded-lg flex flex-col gap-5 py-6 px-5 text-[14px] text-[#808080] pb-10"
+        className="relative w-[92%] max-w-md bg-[#121212] border border-neutral-800 rounded-2xl shadow-2xl p-6 text-white"
       >
-        <div className="flex justify-between items-center text-black font-extrabold text-[20px]">
-          <h2>{currentState}</h2>
-        </div>
-        {/* input fields */}
-        <div className="flex flex-col gap-5 mt-3">
-          {currentState === "Login" ? (
-            <></>
-          ) : (
+        {/* close button (optional UI improvement) */}
+        <button
+          type="button"
+          className="absolute top-3 right-3 text-gray-400 hover:text-white transition"
+        >
+          <IoClose size={22} />
+        </button>
+
+        {/* title */}
+        <h2 className="text-xl font-semibold text-amber-400 mb-1">
+          {currentState}
+        </h2>
+        <p className="text-xs text-gray-500 mb-6">
+          Welcome back to your dashboard
+        </p>
+
+        {/* inputs */}
+        <div className="flex flex-col gap-4">
+          {currentState === "Sign Up" && (
             <input
               type="text"
-              placeholder="your name"
-              className="outline-none border border-[#c9c9c9]
-            p-2.5 rounded-xl"
               name="name"
-              onChange={onChangeHandeler}
+              placeholder="Full name"
               value={data.name}
+              onChange={onChangeHandler}
+              className="bg-[#0f0f0f] border border-neutral-800 px-4 py-3 rounded-xl outline-none focus:border-amber-400 text-sm"
               required
             />
           )}
+
           <input
             type="email"
-            placeholder="your email"
-            className="outline-none border border-[#c9c9c9]
-            p-2.5 rounded-xl"
             name="email"
-            onChange={onChangeHandeler}
+            placeholder="Email address"
             value={data.email}
+            onChange={onChangeHandler}
+            className="bg-[#0f0f0f] border border-neutral-800 px-4 py-3 rounded-xl outline-none focus:border-amber-400 text-sm"
             required
           />
 
           <input
             type="password"
-            placeholder="Enter Password"
-            className="outline-none border border-[#c9c9c9]
-            p-2.5 rounded-xl"
             name="password"
-            onChange={onChangeHandeler}
+            placeholder="Password"
             value={data.password}
+            onChange={onChangeHandler}
+            className="bg-[#0f0f0f] border border-neutral-800 px-4 py-3 rounded-xl outline-none focus:border-amber-400 text-sm"
             required
           />
         </div>
+
+        {/* submit */}
         <button
           type="submit"
-          className="p-2.5 rounded-xl text-white bg-amber-400 hover:bg-amber-500 font-bold text-[15px] cursor-pointer "
+          className="w-full mt-6 py-3 rounded-xl bg-amber-400 text-black font-semibold hover:bg-amber-500 transition"
         >
-          {currentState === "Sign Up" ? "Create account" : "Login"}
+          {currentState === "Sign Up" ? "Create Account" : "Login"}
         </button>
-        {/* popup condition */}
-        <div className="flex items-start gap-2 -mt-2">
-          <input type="checkbox" className="mt-1" required />
-          <p>by continuing, I agree to the terms of use & provacy policy</p>
-        </div>
-        {/* change between Login and Sign up */}
-        {currentState === "Login" ? (
-          <p className="text-center">
-            Create new account?{" "}
-            <span
-              className="text-amber-400 font-semibold cursor-pointer"
-              onClick={() => setCurrentState("Sign Up")}
-            >
-              Click here
-            </span>
-          </p>
-        ) : (
-          <p className="text-center">
-            Already have an account?{" "}
-            <span
-              className="text-amber-400 font-semibold cursor-pointer"
-              onClick={() => setCurrentState("Login")}
-            >
-              Login here
-            </span>
-          </p>
-        )}
+
+        {/* switch */}
+        <p className="text-center text-xs text-gray-500 mt-5">
+          {currentState === "Login" ? (
+            <>
+              New here?{" "}
+              <span
+                onClick={() => setCurrentState("Sign Up")}
+                className="text-amber-400 cursor-pointer hover:underline"
+              >
+                Create account
+              </span>
+            </>
+          ) : (
+            <>
+              Already have an account?{" "}
+              <span
+                onClick={() => setCurrentState("Login")}
+                className="text-amber-400 cursor-pointer hover:underline"
+              >
+                Login
+              </span>
+            </>
+          )}
+        </p>
       </form>
     </div>
   );
