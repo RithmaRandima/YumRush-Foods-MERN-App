@@ -92,7 +92,10 @@ const Add = ({ url }) => {
 
   return (
     <div className="list w-[80%] h-[80vh] hide-scrollbar text-white text-[16px] bg-[#151515] rounded-2xl pl-10 p-3 pb-10 overflow-y-auto flex-1 m-3 mb-5">
-      <form className="gap-5 space-between" onSubmit={onSubmitHandeler}>
+      <form
+        className="add-form gap-5 space-between"
+        onSubmit={onSubmitHandeler}
+      >
         {/* IMAGE UPLOAD */}
         <div className="add-img-upload space-between">
           <p>Upload Image</p>

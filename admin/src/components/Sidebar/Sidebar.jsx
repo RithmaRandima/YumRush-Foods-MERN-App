@@ -8,19 +8,21 @@ import { FaOpencart } from "react-icons/fa";
 import { RiUserSettingsFill } from "react-icons/ri";
 import { IoSettings } from "react-icons/io5";
 import { BiSolidBarChartSquare } from "react-icons/bi";
+import { useContext } from "react";
+import { AdminContext } from "../../context/AdminContext";
 const Sidebar = () => {
+  const { admin, logOut } = useContext(AdminContext);
   return (
     <div className="sidebar relative bg-[#151515] text-white rounded-2xl w-[18%] h-[85vh] ml-3 flex flex-col items-center py-5">
       {/* side bar top part */}
       <div className="flex flex-col items-center">
         {/* add image after add authorization */}
-        <h1>hi</h1>
         <FaUserCircle className="text-amber-300 text-[50px]" />
         <h1 className="text-[20px] font-extralight tracking-[2px]">
-          rithma randima
+          {admin?.name || "Admin"}
         </h1>
-        <p className="text-[11px] font-bold uppercase text-gray-500/60 mb-3">
-          administrator
+        <p className="text-[11px] font-bold text-gray-500/60 ">
+          {admin?.email}
         </p>
       </div>
       {/* sidebar options */}
@@ -47,7 +49,7 @@ const Sidebar = () => {
           <p className="font-bold text-[12px] tracking-[1px]">Orders</p>
         </NavLink>
 
-        <button to={"/orders"} className="sidebar-option">
+        <button onClick={logOut} className="sidebar-option">
           <FaOpencart className="text-[20px] font-extrabold" />
           <p className="font-bold text-[12px] tracking-[1px]">Logout</p>
         </button>

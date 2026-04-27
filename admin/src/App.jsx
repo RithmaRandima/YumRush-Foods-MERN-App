@@ -7,18 +7,24 @@ import List from "./pages/List/List";
 import Orders from "./pages/Orders/Orders";
 import { ToastContainer } from "react-toastify";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import { AdminContext } from "./context/AdminContext";
+import { useContext } from "react";
+import LoginPopup from "./components/LoginPopup/LoginPopup";
 
 const App = () => {
+  const { token, setShowLogin } = useContext(AdminContext);
   const url = "http://localhost:4000";
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
       <ToastContainer autoClose={1000} />
+
       <Navbar />
       <hr />
-      {/* app container */}
+
       <div className="app-content flex items-start mt-2 pr-5 gap-5">
         <Sidebar />
+
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/add" element={<Add url={url} />} />
@@ -26,6 +32,9 @@ const App = () => {
           <Route path="/orders" element={<Orders url={url} />} />
         </Routes>
       </div>
+
+      {/* 👇 LOGIN OVERLAY */}
+      {!token && <LoginPopup />}
     </div>
   );
 };

@@ -27,6 +27,14 @@ export const getDashboardData = async (req, res) => {
       ordersByDate[date] = (ordersByDate[date] || 0) + 1;
     });
 
+    // revenue per day
+    const revenueByDate = {};
+
+    orders.forEach((order) => {
+      const date = order.createdAt.toISOString().split("T")[0];
+      revenueByDate[date] = (revenueByDate[date] || 0) + order.amount;
+    });
+
     res.json({
       success: true,
       data: {
@@ -36,6 +44,7 @@ export const getDashboardData = async (req, res) => {
         totalRevenue,
         statusData,
         ordersByDate,
+        revenueByDate, // 👈 add this
       },
     });
   } catch (error) {
