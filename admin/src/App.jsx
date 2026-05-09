@@ -30,7 +30,7 @@ const App = () => {
           <Navbar />
           <hr />
 
-          <div className="app-content flex items-start mt-2 pr-5 gap-5">
+          <div className="app-content flex items-start mt-2 lg:pr-5 gap-5">
             <Sidebar />
 
             <Routes>

@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { AdminContext } from "../../context/AdminContext";
+import { IoMenu } from "react-icons/io5";
 
 const Navbar = () => {
-  const { admin } = useContext(AdminContext);
+  const { admin, setOpen } = useContext(AdminContext);
 
   return (
     <div className="flex items-center justify-between px-[4%] py-4 bg-gradient-to-b from-[#0f0f0f] to-[#0b0b0b] border-b border-neutral-800">
@@ -36,6 +37,12 @@ const Navbar = () => {
           <div className="w-9 h-9 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-semibold text-sm">
             {admin?.name?.charAt(0) || "A"}
           </div>
+        </div>
+
+        <div className="lg:hidden  flex items-center justify-between bg-[#0f0f0f] text-white">
+          <button onClick={() => setOpen(true)} className="text-2xl">
+            <IoMenu />
+          </button>
         </div>
       </div>
     </div>

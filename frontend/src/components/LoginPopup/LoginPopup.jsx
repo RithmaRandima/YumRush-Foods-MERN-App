@@ -27,7 +27,7 @@ const LoginPopup = () => {
     setLoading(true);
 
     try {
-      let endpoint =
+      const endpoint =
         currentState === "Login"
           ? `${url}/api/user/login`
           : `${url}/api/user/register`;
@@ -54,29 +54,51 @@ const LoginPopup = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md">
+    <div
+      className="
+        fixed inset-0 z-50
+        flex items-center justify-center
+        bg-black/70 backdrop-blur-md
+        px-4
+      "
+    >
       <form
         onSubmit={onLogin}
-        className="w-[90%] sm:w-[400px] bg-[#121212] border border-neutral-800 rounded-2xl text-white p-6 flex flex-col gap-5"
+        className="
+          w-full max-w-md
+          bg-[#121212]
+          border border-neutral-800
+          rounded-2xl
+          text-white
+          p-5 sm:p-6
+          flex flex-col gap-4 sm:gap-5
+          relative
+          max-h-[90vh]
+          overflow-y-auto
+        "
       >
-        {/* HEADER */}
-        <div className="flex justify-between items-start">
-          <div>
-            <h2 className="text-xl font-semibold text-amber-400">
-              {currentState}
-            </h2>
-            <p className="text-xs text-gray-500 mt-1">
-              Welcome back to YumRush
-            </p>
-          </div>
+        {/* CLOSE */}
+        <IoClose
+          className="
+            absolute top-3 right-3
+            text-2xl
+            cursor-pointer
+            hover:scale-110 transition
+            text-gray-400 hover:text-white
+          "
+          onClick={() => setShowLogin(false)}
+        />
 
-          <IoClose
-            className="text-2xl cursor-pointer hover:scale-110 transition"
-            onClick={() => setShowLogin(false)}
-          />
+        {/* HEADER */}
+        <div>
+          <h2 className="text-lg sm:text-xl font-semibold text-amber-400">
+            {currentState}
+          </h2>
+
+          <p className="text-xs text-gray-500 mt-1">Welcome back to YumRush</p>
         </div>
 
-        {/* NAME (SIGN UP ONLY) */}
+        {/* NAME */}
         {currentState === "Sign Up" && (
           <input
             type="text"
@@ -84,7 +106,14 @@ const LoginPopup = () => {
             placeholder="Your name"
             value={data.name}
             onChange={onChangeHandeler}
-            className="p-3 rounded-xl bg-[#1a1a1a] border border-neutral-800 outline-none text-sm"
+            className="
+              p-3 rounded-xl
+              bg-[#1a1a1a]
+              border border-neutral-800
+              outline-none
+              text-sm
+              w-full
+            "
             required
           />
         )}
@@ -96,7 +125,14 @@ const LoginPopup = () => {
           placeholder="Your email"
           value={data.email}
           onChange={onChangeHandeler}
-          className="p-3 rounded-xl bg-[#1a1a1a] border border-neutral-800 outline-none text-sm"
+          className="
+            p-3 rounded-xl
+            bg-[#1a1a1a]
+            border border-neutral-800
+            outline-none
+            text-sm
+            w-full
+          "
           required
         />
 
@@ -107,21 +143,36 @@ const LoginPopup = () => {
           placeholder="Password"
           value={data.password}
           onChange={onChangeHandeler}
-          className="p-3 rounded-xl bg-[#1a1a1a] border border-neutral-800 outline-none text-sm"
+          className="
+            p-3 rounded-xl
+            bg-[#1a1a1a]
+            border border-neutral-800
+            outline-none
+            text-sm
+            w-full
+          "
           required
         />
 
         {/* TERMS */}
-        <div className="flex items-start gap-2 text-xs text-gray-500">
+        <label className="flex items-start gap-2 text-xs text-gray-500 leading-snug">
           <input type="checkbox" required className="mt-1" />
-          <p>By continuing, you agree to our terms & privacy policy.</p>
-        </div>
+          <span>By continuing, you agree to our terms & privacy policy.</span>
+        </label>
 
         {/* BUTTON */}
         <button
           type="submit"
           disabled={loading}
-          className="p-3 rounded-xl bg-amber-400 hover:bg-amber-500 text-black font-bold text-sm transition disabled:opacity-50"
+          className="
+            p-3 rounded-xl
+            bg-amber-400
+            hover:bg-amber-500
+            text-black
+            font-bold text-sm
+            transition
+            disabled:opacity-50
+          "
         >
           {loading
             ? "Please wait..."
@@ -131,7 +182,7 @@ const LoginPopup = () => {
         </button>
 
         {/* SWITCH */}
-        <p className="text-center text-sm text-gray-400">
+        <p className="text-center text-xs sm:text-sm text-gray-400">
           {currentState === "Login" ? (
             <>
               New here?{" "}

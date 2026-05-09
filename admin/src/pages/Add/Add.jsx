@@ -23,17 +23,12 @@ const Add = ({ url }) => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // ✅ VALIDATION FUNCTION
   const validateForm = () => {
     if (!data.name.trim()) return "Food name is required";
-
     if (!data.shortdescription.trim()) return "Short description is required";
-
     if (!data.longdescription.trim()) return "Long description is required";
-
     if (!data.price.trim() || Number(data.price) <= 0)
       return "Valid price is required";
-
     if (!data.ingredients.trim()) return "Ingredients are required";
 
     const ingredientsArray = data.ingredients
@@ -49,7 +44,6 @@ const Add = ({ url }) => {
     return null;
   };
 
-  // ✅ SUBMIT HANDLER
   const onSubmitHandeler = async (event) => {
     event.preventDefault();
 
@@ -94,11 +88,25 @@ const Add = ({ url }) => {
   };
 
   return (
-    <div className="w-[80%] h-[80vh] overflow-y-auto hide-scrollbar text-white bg-[#121212] rounded-2xl p-6 m-3 border border-neutral-800 shadow-xl">
-      <form className="space-y-8" onSubmit={onSubmitHandeler}>
+    <div
+      className="
+      w-full lg:w-[80%]
+      min-h-screen lg:h-[80vh]
+      overflow-y-auto hide-scrollbar
+      text-white bg-[#121212]
+      rounded-2xl
+      p-4 sm:p-6
+      m-2 sm:m-3
+      border border-neutral-800
+      shadow-xl
+    "
+    >
+      <form className="space-y-6 sm:space-y-8" onSubmit={onSubmitHandeler}>
         {/* HEADER */}
         <div className="mb-2">
-          <h2 className="text-lg font-semibold text-white">Add New Product</h2>
+          <h2 className="text-lg sm:text-xl font-semibold text-white">
+            Add New Product
+          </h2>
           <p className="text-xs text-gray-500">Create a new menu item</p>
         </div>
 
@@ -108,7 +116,18 @@ const Add = ({ url }) => {
 
           <label
             htmlFor="image"
-            className="group relative flex items-center justify-center w-32 h-20 rounded-xl border border-dashed border-neutral-700 bg-[#0f0f0f] cursor-pointer hover:border-amber-500/40 transition"
+            className="
+              group
+              relative
+              flex items-center justify-center
+              w-28 h-20 sm:w-32 sm:h-24
+              rounded-xl
+              border border-dashed border-neutral-700
+              bg-[#0f0f0f]
+              cursor-pointer
+              hover:border-amber-500/40
+              transition
+            "
           >
             {image ? (
               <img
@@ -117,8 +136,8 @@ const Add = ({ url }) => {
               />
             ) : (
               <div className="text-center text-gray-500 group-hover:text-amber-400 transition">
-                <IoMdCloudUpload className="text-2xl mx-auto mb-1" />
-                <p className="text-xs">Upload</p>
+                <IoMdCloudUpload className="text-xl sm:text-2xl mx-auto mb-1" />
+                <p className="text-[10px] sm:text-xs">Upload</p>
               </div>
             )}
           </label>
@@ -140,12 +159,24 @@ const Add = ({ url }) => {
             value={data.name}
             onChange={onChangeHandler}
             placeholder="Enter product name"
-            className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 text-white placeholder-gray-600 focus:border-amber-500/40 focus:outline-none transition"
+            className="
+              w-full
+              px-4 py-3
+              rounded-xl
+              bg-[#0f0f0f]
+              border border-neutral-800
+              text-white
+              placeholder-gray-600
+              focus:border-amber-500/40
+              outline-none
+              transition
+              text-sm
+            "
           />
         </div>
 
         {/* DESCRIPTIONS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="space-y-2">
             <p className="text-sm text-gray-400">Short Description</p>
             <textarea
@@ -153,7 +184,19 @@ const Add = ({ url }) => {
               value={data.shortdescription}
               onChange={onChangeHandler}
               rows={3}
-              className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 text-white placeholder-gray-600 focus:border-amber-500/40 focus:outline-none transition"
+              className="
+                w-full
+                px-4 py-3
+                rounded-xl
+                bg-[#0f0f0f]
+                border border-neutral-800
+                text-white
+                placeholder-gray-600
+                focus:border-amber-500/40
+                outline-none
+                transition
+                text-sm
+              "
             />
           </div>
 
@@ -164,43 +207,70 @@ const Add = ({ url }) => {
               value={data.longdescription}
               onChange={onChangeHandler}
               rows={3}
-              className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 text-white placeholder-gray-600 focus:border-amber-500/40 focus:outline-none transition"
+              className="
+                w-full
+                px-4 py-3
+                rounded-xl
+                bg-[#0f0f0f]
+                border border-neutral-800
+                text-white
+                placeholder-gray-600
+                focus:border-amber-500/40
+                outline-none
+                transition
+                text-sm
+              "
             />
           </div>
         </div>
 
         {/* CATEGORY + PRICE */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <p className="text-sm text-gray-400">Category</p>
-            <select
-              name="category"
-              value={data.category}
-              onChange={onChangeHandler}
-              className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 text-white focus:border-amber-500/40 outline-none"
-            >
-              <option>Salad</option>
-              <option>Rolls</option>
-              <option>Deserts</option>
-              <option>Sandwich</option>
-              <option>Cake</option>
-              <option>Pure Veg</option>
-              <option>Pasta</option>
-              <option>Noodles</option>
-            </select>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <select
+            name="category"
+            value={data.category}
+            onChange={onChangeHandler}
+            className="
+              w-full
+              px-4 py-3
+              rounded-xl
+              bg-[#0f0f0f]
+              border border-neutral-800
+              text-white
+              outline-none
+              text-sm
+            "
+          >
+            <option>Salad</option>
+            <option>Rolls</option>
+            <option>Deserts</option>
+            <option>Sandwich</option>
+            <option>Cake</option>
+            <option>Pure Veg</option>
+            <option>Pasta</option>
+            <option>Noodles</option>
+          </select>
 
-          <div className="space-y-2">
-            <p className="text-sm text-gray-400">Price</p>
-            <input
-              type="number"
-              name="price"
-              value={data.price}
-              onChange={onChangeHandler}
-              placeholder="0.00"
-              className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 text-white placeholder-gray-600 focus:border-amber-500/40 focus:outline-none transition"
-            />
-          </div>
+          <input
+            type="number"
+            name="price"
+            value={data.price}
+            onChange={onChangeHandler}
+            placeholder="0.00"
+            className="
+              w-full
+              px-4 py-3
+              rounded-xl
+              bg-[#0f0f0f]
+              border border-neutral-800
+              text-white
+              placeholder-gray-600
+              focus:border-amber-500/40
+              outline-none
+              transition
+              text-sm
+            "
+          />
         </div>
 
         {/* INGREDIENTS */}
@@ -212,14 +282,37 @@ const Add = ({ url }) => {
             value={data.ingredients}
             onChange={onChangeHandler}
             placeholder="Tomato, Cheese, Onion..."
-            className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 text-white placeholder-gray-600 focus:border-amber-500/40 focus:outline-none transition"
+            className="
+              w-full
+              px-4 py-3
+              rounded-xl
+              bg-[#0f0f0f]
+              border border-neutral-800
+              text-white
+              placeholder-gray-600
+              focus:border-amber-500/40
+              outline-none
+              transition
+              text-sm
+            "
           />
         </div>
 
         {/* BUTTON */}
         <button
           type="submit"
-          className="px-6 py-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:bg-amber-500/20 transition font-medium"
+          className="
+            w-full sm:w-auto
+            px-6 py-3
+            rounded-xl
+            bg-amber-500/10
+            border border-amber-500/30
+            text-amber-300
+            hover:bg-amber-500/20
+            transition
+            font-medium
+            text-sm
+          "
         >
           Add Product
         </button>

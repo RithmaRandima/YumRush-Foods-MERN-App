@@ -10,6 +10,8 @@ const AdminContextProvider = ({ children }) => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [foodList, setFoodList] = useState([]);
+  const [open, setOpen] = useState(false);
+
   const url = "http://localhost:4000";
 
   // fetch dashboard data
@@ -76,12 +78,14 @@ const AdminContextProvider = ({ children }) => {
     dashboard,
     orders,
     loading,
+    foodList,
+    open,
+    setOpen,
     fetchDashboard,
     fetchOrders,
     setToken,
     setAdmin,
     logOut,
-    foodList,
   };
 
   return (

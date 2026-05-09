@@ -8,7 +8,6 @@ import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 const List = ({ url }) => {
   const [list, setList] = useState([]);
 
-  // pagination states
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
@@ -40,11 +39,9 @@ const List = ({ url }) => {
     fetchList();
   }, []);
 
-  // pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = list.slice(indexOfFirstItem, indexOfLastItem);
-
   const totalPages = Math.ceil(list.length / itemsPerPage);
 
   const nextPage = () => {
@@ -56,65 +53,103 @@ const List = ({ url }) => {
   };
 
   return (
-    <div className="w-[80%] h-[80vh] overflow-y-auto hide-scrollbar bg-[#121212] text-white rounded-2xl border border-neutral-800 shadow-xl p-6 m-3">
+    <div
+      className="
+        w-full lg:w-[80%]
+        min-h-[80vh]
+        overflow-x-auto lg:overflow-y-auto
+        bg-[#121212]
+        text-white
+        rounded-2xl
+        border border-neutral-800
+        shadow-xl
+        p-4 sm:p-6
+        m-2 sm:m-3
+      "
+    >
       {/* HEADER */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-2">
         <div>
-          <h2 className="text-lg font-semibold text-white">Food Items</h2>
+          <h2 className="text-lg font-semibold">Food Items</h2>
           <p className="text-xs text-gray-500">
             Total {list.length} products available
           </p>
         </div>
       </div>
 
-      {/* TABLE HEADER */}
-      <div className="grid grid-cols-5 text-xs text-gray-500 uppercase px-4 py-3 bg-[#161616] rounded-xl border border-neutral-800">
-        <span>Image</span>
-        <span>Name</span>
-        <span>Category</span>
-        <span>Price</span>
-        <span className="text-center">Action</span>
-      </div>
+      {/* TABLE WRAPPER (MOBILE SCROLL FIX) */}
+      <div className="min-w-[600px]">
+        {/* TABLE HEADER */}
+        <div className="grid grid-cols-5 text-xs text-gray-500 uppercase px-4 py-3 bg-[#161616] rounded-xl border border-neutral-800">
+          <span>Image</span>
+          <span>Name</span>
+          <span>Category</span>
+          <span>Price</span>
+          <span className="text-center">Action</span>
+        </div>
 
-      {/* LIST */}
-      <div className="mt-4 space-y-3">
-        {currentItems.map((item) => (
-          <div
-            key={item._id}
-            className="grid grid-cols-5 items-center px-4 py-3 rounded-xl bg-[#0f0f0f] border border-neutral-800 hover:border-amber-500/30 hover:bg-[#141414] transition group"
-          >
-            {/* IMAGE */}
-            <div className="flex items-center gap-3">
-              <img
-                src={`${url}/images/${item.image}`}
-                className="w-12 h-12 rounded-lg object-cover border border-neutral-800 group-hover:scale-105 transition"
-              />
+        {/* LIST */}
+        <div className="mt-4 space-y-3">
+          {currentItems.map((item) => (
+            <div
+              key={item._id}
+              className="
+                grid grid-cols-5
+                items-center
+                px-3 sm:px-4
+                py-3
+                rounded-xl
+                bg-[#0f0f0f]
+                border border-neutral-800
+                hover:border-amber-500/30
+                hover:bg-[#141414]
+                transition
+                gap-2
+              "
+            >
+              {/* IMAGE */}
+              <div className="flex items-center">
+                <img
+                  src={`${url}/images/${item.image}`}
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg object-cover border border-neutral-800"
+                />
+              </div>
+
+              {/* NAME */}
+              <p className="text-xs sm:text-sm text-gray-300 truncate">
+                {item.name}
+              </p>
+
+              {/* CATEGORY */}
+              <p className="text-xs sm:text-sm text-gray-400">
+                {item.category}
+              </p>
+
+              {/* PRICE */}
+              <p className="text-xs sm:text-sm font-medium text-emerald-400">
+                ${Number(item.price).toFixed(2)}
+              </p>
+
+              {/* ACTION */}
+              <div className="flex justify-center">
+                <button
+                  onClick={() => removeFood(item._id)}
+                  className="
+                    w-8 h-8 sm:w-9 sm:h-9
+                    flex items-center justify-center
+                    rounded-lg
+                    bg-red-500/10
+                    text-red-400
+                    hover:bg-red-500/20
+                    transition
+                  "
+                >
+                  <FaTrash size={12} />
+                </button>
+              </div>
             </div>
-
-            {/* NAME */}
-            <p className="text-sm text-gray-300 group-hover:text-white transition truncate">
-              {item.name}
-            </p>
-
-            {/* CATEGORY */}
-            <p className="text-sm text-gray-400">{item.category}</p>
-
-            {/* PRICE */}
-            <p className="text-sm font-medium text-emerald-400">
-              ${Number(item.price).toFixed(2)}
-            </p>
-
-            {/* ACTION */}
-            <div className="flex justify-center">
-              <button
-                onClick={() => removeFood(item._id)}
-                className="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition"
-              >
-                <FaTrash />
-              </button>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* PAGINATION */}

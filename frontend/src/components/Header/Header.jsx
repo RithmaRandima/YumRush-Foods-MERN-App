@@ -23,7 +23,7 @@ const Header = () => {
       </Parallax>
 
       {/* header content */}
-      <div className="header-contents absolute top-1/2  left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center p-4 text-center w-full md:w-[900px]">
+      <div className="header-contents absolute -mt-8 md:mt-0 top-1/2  left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center p-4 text-center w-full md:w-[900px]">
         <p className="text-amber-100 font-exd text-[14px] sm:text-[16px] tracking-[3px] sm:tracking-[4px] mb-3">
           Indulge in Culinary Excellence
         </p>

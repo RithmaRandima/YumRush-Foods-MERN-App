@@ -30,11 +30,26 @@ const Orders = ({ url }) => {
   }, []);
 
   return (
-    <div className="w-[80%] h-[80vh] text-white bg-[#151515] rounded-2xl p-5 overflow-y-auto flex-1 m-3 mb-5 hide-scrollbar">
+    <div
+      className="
+        w-full lg:w-[80%]
+        h-[calc(100vh-95px)]
+        lg:h-[83vh]
+        text-white
+        bg-[#151515]
+        rounded-2xl
+        p-4 sm:p-5
+        overflow-y-auto
+        flex-1
+        m-2 sm:m-3
+        mb-5
+        hide-scrollbar
+      "
+    >
       {/* HEADER */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-3">
         <div>
-          <h2 className="text-[20px] font-semibold text-white tracking-wide">
+          <h2 className="text-[18px] sm:text-[20px] font-semibold tracking-wide">
             All Orders
           </h2>
           <p className="text-xs text-gray-500 mt-1">
@@ -42,7 +57,7 @@ const Orders = ({ url }) => {
           </p>
         </div>
 
-        <div className="text-xs text-gray-400 bg-[#0f0f0f] px-3 py-1 rounded-full border border-neutral-800">
+        <div className="text-xs text-gray-400 bg-[#0f0f0f] px-3 py-1 rounded-full border border-neutral-800 w-fit">
           Total: {data.length}
         </div>
       </div>

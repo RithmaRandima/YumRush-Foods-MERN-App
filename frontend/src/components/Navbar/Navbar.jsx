@@ -313,17 +313,19 @@ const Navbar = () => {
             Contact us
           </a>
 
-          {/* CART */}
-          <Link
-            to="/myorders"
-            onClick={() => {
-              setMenu("cart");
-              setMobileOpen(false);
-            }}
-            className="flex items-center gap-2"
-          >
-            <span className="text-white">My Orders</span>
-          </Link>
+          {/* my orders */}
+          {token && (
+            <Link
+              to="/myorders"
+              onClick={() => {
+                setMenu("cart");
+                setMobileOpen(false);
+              }}
+              className="flex items-center gap-2"
+            >
+              <span className="text-white">My Orders</span>
+            </Link>
+          )}
 
           {/* AUTH */}
           {!token ? (

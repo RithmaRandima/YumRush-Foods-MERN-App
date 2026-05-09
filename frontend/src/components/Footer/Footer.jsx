@@ -2,86 +2,111 @@ import React from "react";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import {
   FaFacebook,
-  FaGooglePlus,
   FaInstagram,
-  FaMap,
   FaTwitter,
+  FaMapMarkerAlt,
+  FaEnvelope,
+  FaPhone,
 } from "react-icons/fa";
 
 const Footer = () => {
   return (
     <footer
-      className="text-[#d9d9d9] bg-[#0f0f0f] flex flex-col items-center gap-10 p-10 pb-5"
       id="footer"
+      className="
+        bg-[#0f0f0f]
+        text-[#cfcfcf]
+        border-t border-[#1f1f1f]
+        pt-12 pb-6 px-6
+        flex flex-col items-center
+        gap-10
+      "
     >
-      {/* content */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16 items-start">
-        {/* Column 1 - Brand */}
-        <div className="flex flex-col items-start gap-5">
-          <div className="relative text-amber-300">
-            <h1 className="text-amber-300 tracking-[4px] font-extralight text-[35px]">
-              YumRush
-            </h1>
-            <GiForkKnifeSpoon className="absolute -right-11 -bottom-0 text-[60px]" />
+      {/* TOP GRID */}
+      <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        {/* BRAND */}
+        <div className="flex flex-col gap-4">
+          <div className="relative text-amber-300 w-fit">
+            <h1 className="text-3xl font-extralight tracking-[4px]">YumRush</h1>
+            <GiForkKnifeSpoon className="absolute -right-8 -bottom-1 text-4xl" />
           </div>
 
-          <p className="text-gray-500 text-[14px] leading-relaxed">
-            Fast, fresh, and delicious food delivered to your doorstep.
+          <p className="text-gray-500 text-sm leading-relaxed">
+            Fresh food delivered fast. Simple ordering, better experience, real
+            taste.
           </p>
         </div>
 
-        {/* Column 2 - Location */}
+        {/* LOCATION */}
         <div>
-          <h2 className="tracking-[3px] mb-4 text-white">LOCATION</h2>
-          <div className="text-gray-500 text-[15px]">
-            <p className="mb-1">732/21 Second Street</p>
-            <p className="mb-1">Manchester, Kung Street</p>
-            <p className="mb-1">Kingston United Kingdom</p>
+          <h2 className="text-white text-sm tracking-[3px] mb-4">LOCATION</h2>
+
+          <div className="space-y-2 text-gray-500 text-sm">
+            <p className="flex items-center gap-2">
+              <FaMapMarkerAlt className="text-amber-300 text-xs" />
+              732 Second Street
+            </p>
+            <p>Manchester, UK</p>
+            <p>Kingston Area</p>
           </div>
         </div>
 
-        {/* Column 3 - Company */}
+        {/* COMPANY */}
         <div>
-          <h2 className="tracking-[3px] mb-4 text-white">COMPANY</h2>
-          <ul className="text-gray-500 text-[15px] space-y-1 cursor-pointer">
-            <li className="hover:text-amber-300 transition">Home</li>
-            <li className="hover:text-amber-300 transition">About Us</li>
-            <li className="hover:text-amber-300 transition">Delivery</li>
-            <li className="hover:text-amber-300 transition">Privacy Policy</li>
+          <h2 className="text-white text-sm tracking-[3px] mb-4">COMPANY</h2>
+
+          <ul className="space-y-2 text-gray-500 text-sm">
+            {["Home", "Menu", "About", "Privacy"].map((item) => (
+              <li
+                key={item}
+                className="hover:text-amber-300 transition cursor-pointer"
+              >
+                {item}
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* Column 4 - Contact */}
+        {/* CONTACT */}
         <div>
-          <h2 className="tracking-[3px] mb-4 text-white">GET IN TOUCH</h2>
+          <h2 className="text-white text-sm tracking-[3px] mb-4">CONTACT</h2>
 
-          <ul className="text-gray-500 text-[15px] space-y-1">
-            <li>+1-222-345-6786</li>
-            <li>contact@gmail.com</li>
-          </ul>
+          <div className="space-y-2 text-gray-500 text-sm">
+            <p className="flex items-center gap-2">
+              <FaPhone className="text-amber-300 text-xs" />
+              +1 222 345 6786
+            </p>
 
-          {/* CTA Link */}
+            <p className="flex items-center gap-2">
+              <FaEnvelope className="text-amber-300 text-xs" />
+              contact@yumrush.com
+            </p>
+          </div>
+
           <a
             href="/menu"
-            className="inline-block mt-4 uppercase tracking-[2px] text-white font-semibold text-[14px] hover:text-amber-300 transition-colors duration-200"
+            className="
+              inline-block mt-4
+              text-amber-300 text-sm
+              hover:text-white
+              transition
+            "
           >
-            Browse Menu
+            Browse Menu →
           </a>
         </div>
       </div>
 
-      {/* Social Icons */}
-      <div className="flex mt-5 gap-6 text-white/50 text-[22px]">
-        <FaFacebook className="hover:scale-110 hover:text-amber-300 duration-200 cursor-pointer" />
-        <FaInstagram className="hover:scale-110 hover:text-amber-300 duration-200 cursor-pointer" />
-        <FaTwitter className="hover:scale-110 hover:text-amber-300 duration-200 cursor-pointer" />
-        <FaGooglePlus className="hover:scale-110 hover:text-amber-300 duration-200 cursor-pointer" />
-        <FaMap className="hover:scale-110 hover:text-amber-300 duration-200 cursor-pointer" />
+      {/* SOCIAL */}
+      <div className="flex items-center gap-6 text-gray-500 text-lg">
+        <FaFacebook className="hover:text-amber-300 transition cursor-pointer" />
+        <FaInstagram className="hover:text-amber-300 transition cursor-pointer" />
+        <FaTwitter className="hover:text-amber-300 transition cursor-pointer" />
       </div>
 
-      {/* Copyright */}
-      <p className="font-bold tracking-[3px] text-[10px] my-4 text-center text-gray-500">
-        &copy; 2026 YumRush Restaurant. All rights reserved.
+      {/* COPYRIGHT */}
+      <p className="text-gray-600 text-xs tracking-[2px] text-center">
+        © 2026 YumRush. All rights reserved.
       </p>
     </footer>
   );
