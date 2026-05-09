@@ -44,6 +44,7 @@ const LoginPopup = () => {
         toast.error(response.data.message);
       }
     } catch (error) {
+      console.log("Admin Login Page Error", error);
       toast.error("Server error");
     }
   };
@@ -54,14 +55,6 @@ const LoginPopup = () => {
         onSubmit={onLogin}
         className="relative w-[92%] max-w-md bg-[#121212] border border-neutral-800 rounded-2xl shadow-2xl p-6 text-white"
       >
-        {/* close button (optional UI improvement) */}
-        <button
-          type="button"
-          className="absolute top-3 right-3 text-gray-400 hover:text-white transition"
-        >
-          <IoClose size={22} />
-        </button>
-
         {/* title */}
         <h2 className="text-xl font-semibold text-amber-400 mb-1">
           {currentState}

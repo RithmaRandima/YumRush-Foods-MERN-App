@@ -11,25 +11,36 @@ import { useContext } from "react";
 import { StoreContext } from "./context/StoreContext";
 import Verify from "./pages/Verify/Verify";
 import MyOrders from "./pages/MyOrders/MyOrders";
+import SplashScreen from "./pages/SplashScreen/SplashScreen";
 
 const App = () => {
-  const { showLogin } = useContext(StoreContext);
+  const { showLogin, loading } = useContext(StoreContext);
+
   return (
     <>
-      {showLogin && <LoginPopup />}
-      <div className="app">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/menu" element={<Products />} />
-          <Route path="/order" element={<PlaceOrder />} />
-          <Route path="/myorders" element={<MyOrders />} />
-          <Route path="/verify" element={<Verify />} />
-          <Route path="/food/:id" element={<FoodDetail />} />
-        </Routes>
-      </div>
-      <Footer />
+      {/* SPLASH SCREEN */}
+      {loading && <SplashScreen loading={loading} />}
+
+      {/* APP CONTENT */}
+      {!loading && (
+        <div className="app">
+          {showLogin && <LoginPopup />}
+
+          <Navbar />
+
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/menu" element={<Products />} />
+            <Route path="/order" element={<PlaceOrder />} />
+            <Route path="/myorders" element={<MyOrders />} />
+            <Route path="/verify" element={<Verify />} />
+            <Route path="/food/:id" element={<FoodDetail />} />
+          </Routes>
+
+          <Footer />
+        </div>
+      )}
     </>
   );
 };

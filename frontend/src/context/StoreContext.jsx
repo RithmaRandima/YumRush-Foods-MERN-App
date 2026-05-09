@@ -11,7 +11,7 @@ const StoreContextProvider = (props) => {
   const [showLogin, setShowLogin] = useState(false);
   const [user, setUser] = useState({});
   const [menu, setMenu] = useState("home");
-
+  const [loading, setLoading] = useState(true);
   // add to cart function
   const addToCart = async (itemID) => {
     const previousCart = { ...cartItems };
@@ -68,7 +68,7 @@ const StoreContextProvider = (props) => {
       if (cartItems[item] > 0) {
         let itemInfo = food_list.find((product) => product._id === item);
 
-        totalAmount += itemInfo.price * cartItems[item];
+        totalAmount += itemInfo?.price * cartItems[item];
       }
     }
 
@@ -92,6 +92,7 @@ const StoreContextProvider = (props) => {
   const fetchFoodList = async () => {
     const response = await axios.get(`${url}/api/food/list`);
     setFoodList(response.data.data);
+    // setLoading(false);
   };
 
   const loadCartData = async (token) => {
@@ -103,8 +104,12 @@ const StoreContextProvider = (props) => {
     setCartItems(res.data.cartData);
   };
 
+  const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+
   useEffect(() => {
     async function loadData() {
+      setLoading(true);
+
       await fetchFoodList();
 
       const savedToken = localStorage.getItem("token");
@@ -118,6 +123,11 @@ const StoreContextProvider = (props) => {
       if (savedUser) {
         setUser(JSON.parse(savedUser));
       }
+
+      // 🔥 IMPORTANT: force minimum splash time
+      await sleep(1500);
+
+      setLoading(false);
     }
 
     loadData();
@@ -127,20 +137,22 @@ const StoreContextProvider = (props) => {
   const contextValue = {
     food_list,
     cartItems,
+    url,
+    token,
+    loading,
+    showLogin,
+    user,
+    menu,
     setCartItems,
     addToCart,
     removeFromCart,
     getTotalCartAmount,
     getDeliveryFee,
-    url,
-    token,
+    setLoading,
     setToken,
     getDiscount,
-    showLogin,
     setShowLogin,
-    user,
     setUser,
-    menu,
     setMenu,
   };
 

@@ -6,16 +6,27 @@ import CartTotalSection from "../../components/CartTotalSection.jsx/CartTotalSec
 import EmptyCart from "../../components/EmptyCart/EmptyCart";
 
 const Cart = () => {
-  const {
-    cartItems,
-    addToCart,
-    removeFromCart,
-    food_list,
-    url,
-    getTotalCartAmount,
-  } = useContext(StoreContext);
+  const { cartItems, addToCart, removeFromCart, food_list, url, loading } =
+    useContext(StoreContext);
 
-  return getTotalCartAmount() > 0 ? (
+  // check if cart has items
+  const hasCartItems = Object.values(cartItems || {}).some((qty) => qty > 0);
+
+  // show loading while fetching data
+  if (loading) {
+    return (
+      <div className="text-white text-center text-2xl mt-10">
+        Loading Cart...
+      </div>
+    );
+  }
+
+  // show empty cart only after loading completed
+  if (!hasCartItems) {
+    return <EmptyCart />;
+  }
+
+  return (
     <div className="cart flex items-start gap-5 p-4">
       {/* cart item section */}
       <div className="w-full">
@@ -36,22 +47,24 @@ const Cart = () => {
           <br />
           <hr />
 
-          {food_list.map((item, index) => {
-            if (cartItems[item._id] > 0) {
-              return (
-                <CartListRowItem
-                  key={item._id}
-                  item={item}
-                  index={index}
-                  url={url}
-                  cartItems={cartItems}
-                  addToCart={addToCart}
-                  removeFromCart={removeFromCart}
-                />
-              );
-            }
-            return null;
-          })}
+          {food_list &&
+            food_list.map((item, index) => {
+              if (cartItems[item._id] > 0) {
+                return (
+                  <CartListRowItem
+                    key={item._id}
+                    item={item}
+                    index={index}
+                    url={url}
+                    cartItems={cartItems}
+                    addToCart={addToCart}
+                    removeFromCart={removeFromCart}
+                  />
+                );
+              }
+
+              return null;
+            })}
         </div>
       </div>
 
@@ -60,8 +73,6 @@ const Cart = () => {
         <CartTotalSection />
       </div>
     </div>
-  ) : (
-    <EmptyCart />
   );
 };
 

@@ -9,7 +9,7 @@ const AboutSection = () => {
   return (
     <div className="text-white pt-10">
       {/* toppart */}
-      <div className="w-[65%] mx-auto">
+      <div className=" hidden md:block w-[65%] mx-auto">
         {/* header */}
         <div className="text-center">
           <h1 className="text-amber-100 font-exd text-[17px] tracking-[4px] -mb-1">
@@ -50,7 +50,7 @@ const AboutSection = () => {
         </p>
       </div>
       {/* bottom */}
-      <div className="relative w-full pl-15 h-130">
+      <div className="hidden md:block relative w-full pl-15 h-130">
         <h1 className="text-[70px] text-amber-300/10 font-extrabold leading-15 tracking-[2px] w-[500px]">
           Where food Speak with Your plate
         </h1>
@@ -99,6 +99,62 @@ const AboutSection = () => {
             className="w-full h-full object-contain"
           />
         </div>
+      </div>
+
+      {/* ================= MOBILE (NEW ONLY, TEXT NOT CHANGED) ================= */}
+      <div className="md:hidden px-4 relative pb-20">
+        {/* header */}
+        <div className="text-center">
+          <h1 className="text-amber-100 font-exd text-[14px] tracking-[3px]">
+            Discover
+          </h1>
+          <h1
+            style={style}
+            className="text-amber-300 text-[32px] tracking-[6px] font-bold"
+          >
+            Our Story
+          </h1>
+        </div>
+
+        {/* EXACT SAME TEXT (UNCHANGED) */}
+        <h1 className="text-[16px] mb-7 font-extralight leading-7 text-justify">
+          "Cooking is like fashion—always evolving. This restaurant is
+          passionate about exploring new flavors and ingredients from around the
+          world. Inspired by places like Australia, the Bahamas, Budapest, and
+          Moscow, every new ingredient becomes part of a unique and delicious
+          dish."
+        </h1>
+
+        <p className="text-[16px] mb-5 font-extralight leading-7 text-justify">
+          At our restaurant, dining is an art of elegance and refinement. Each
+          dish is crafted from the finest ingredients, blending global
+          inspirations with meticulous attention to detail. Guests are invited
+          to savor sophisticated flavors in an ambiance of contemporary luxury.
+          Every visit promises an exceptional experience, where exquisite
+          cuisine meets attentive service and memorable moments.
+        </p>
+
+        <p className="text-[16px] mb-7 font-extralight leading-7 text-justify">
+          Our culinary philosophy blends innovation with artistry, transforming
+          the finest ingredients into exquisite dishes. The menu evolves with
+          the seasons, showcasing global inspirations while honoring classic
+          techniques. Every detail—from presentation to service—is thoughtfully
+          crafted to offer a refined and memorable dining experience. At our
+          restaurant, guests are not simply dining; they are immersed in a world
+          of sophistication, where each visit celebrates exceptional flavors,
+          elegant surroundings, and the art of fine cuisine.
+        </p>
+
+        {/* simplified bottom ONLY (no layout damage) */}
+        <img
+          src={mainImgObject.menu_1}
+          className="absolute  right-2 -bottom-20  w-50 h-50 object-contain animate-spin [animation-duration:90s]"
+        />
+
+        <img
+          src={mainImgObject.about_2}
+          className="absolute -top-50 -left-2 w-55 h-55 object-contain animate-spin [animation-duration:100s]"
+        />
       </div>
     </div>
   );

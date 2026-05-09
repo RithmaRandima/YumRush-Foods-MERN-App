@@ -5,7 +5,7 @@ import { mainImgObject } from "../../assets/assets";
 
 const Header = () => {
   return (
-    <div className="relative h-[90vh]">
+    <div className="relative h-[80vh] md:h-[90vh] overflow-hidden">
       <Parallax
         strength={200}
         blur={100}
@@ -18,22 +18,25 @@ const Header = () => {
             className="w-[100vw] h-full object-cover"
           />
           {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-black/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black md:via-black/50 via-black/70 to-black/20"></div>
         </Background>
       </Parallax>
 
       {/* header content */}
-      <div className="header-contents absolute top-1/3  pt-30 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center p-4 text-center w-[900px]">
-        <p className="text-amber-100 font-exd text-[15px] tracking-[4px] -mb-3">
+      <div className="header-contents absolute top-1/2  left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center p-4 text-center w-full md:w-[900px]">
+        <p className="text-amber-100 font-exd text-[14px] sm:text-[16px] tracking-[3px] sm:tracking-[4px] mb-3">
           Indulge in Culinary Excellence
         </p>
-        <h2 className="font-extrabold text-center text-[120px] text-amber-300">
+
+        <h2 className="font-extrabold text-center text-[48px] sm:text-[70px] md:text-[120px] text-amber-300 leading-none">
           The Food Heaven
         </h2>
-        <p className="text-white text-3 w-[600px] -mt-4  text-[19px] mb-10">
-          we have propper passion for coocking.Love is the secret ingredient
+
+        <p className="text-white text-[14px] sm:text-[16px] md:text-[19px] w-full md:w-[600px] sm:-mt-4 mb-6 sm:mb-10">
+          we have propper passion for coocking. Love is the secret ingredient
           that makes all aou meals taste better and magical
         </p>
+
         <button className="btn">View Menu</button>
       </div>
     </div>

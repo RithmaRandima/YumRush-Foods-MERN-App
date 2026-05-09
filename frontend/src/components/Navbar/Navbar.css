@@ -10,10 +10,6 @@
   margin: auto;
 }
 
-.navbar-menu {
-  display: flex;
-}
-
 .navbar-profile {
   position: relative;
 }

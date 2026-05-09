@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { IoClose } from "react-icons/io5";
-import { useContext } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
 
@@ -8,6 +7,8 @@ const LoginPopup = () => {
   const { url, setToken, setUser, setShowLogin } = useContext(StoreContext);
 
   const [currentState, setCurrentState] = useState("Login");
+  const [loading, setLoading] = useState(false);
+
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -15,119 +16,144 @@ const LoginPopup = () => {
   });
 
   const onChangeHandeler = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-
-    setData((data) => ({ ...data, [name]: value }));
+    setData((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   const onLogin = async (event) => {
     event.preventDefault();
-    let newUrl = url;
+    setLoading(true);
 
-    if (currentState === "Login") {
-      newUrl += `/api/user/login`;
-    } else {
-      newUrl += `/api/user/register`;
-    }
+    try {
+      let endpoint =
+        currentState === "Login"
+          ? `${url}/api/user/login`
+          : `${url}/api/user/register`;
 
-    const response = await axios.post(newUrl, data);
+      const response = await axios.post(endpoint, data);
 
-    if (response.data.success) {
-      setToken(response.data.token);
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-      setUser(JSON.parse(localStorage.getItem("user")));
-      setShowLogin(false);
-    } else {
-      alert(response.data.message);
+      if (response.data.success) {
+        setToken(response.data.token);
+        setUser(response.data.user);
+
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+
+        setShowLogin(false);
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 w-full h-screen  bg-black/50 backdrop-blur-[2px] flex justify-center items-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md">
       <form
         onSubmit={onLogin}
-        className="w-[30%] max-w-lg bg-white rounded-lg flex flex-col gap-5 py-6 px-5 text-[14px] text-[#808080] pb-10"
+        className="w-[90%] sm:w-[400px] bg-[#121212] border border-neutral-800 rounded-2xl text-white p-6 flex flex-col gap-5"
       >
-        <div className="flex justify-between items-center text-black font-extrabold text-[20px]">
-          <h2>{currentState}</h2>
+        {/* HEADER */}
+        <div className="flex justify-between items-start">
+          <div>
+            <h2 className="text-xl font-semibold text-amber-400">
+              {currentState}
+            </h2>
+            <p className="text-xs text-gray-500 mt-1">
+              Welcome back to YumRush
+            </p>
+          </div>
+
           <IoClose
-            className="font-extrabold text-[22px] cursor-pointer hover:scale-105"
+            className="text-2xl cursor-pointer hover:scale-110 transition"
             onClick={() => setShowLogin(false)}
           />
         </div>
-        {/* input fields */}
-        <div className="flex flex-col gap-5 mt-3">
-          {currentState === "Login" ? (
-            <></>
-          ) : (
-            <input
-              type="text"
-              placeholder="your name"
-              className="outline-none border border-[#c9c9c9]
-            p-2.5 rounded-xl"
-              name="name"
-              onChange={onChangeHandeler}
-              value={data.name}
-              required
-            />
-          )}
-          <input
-            type="email"
-            placeholder="your email"
-            className="outline-none border border-[#c9c9c9]
-            p-2.5 rounded-xl"
-            name="email"
-            onChange={onChangeHandeler}
-            value={data.email}
-            required
-          />
 
+        {/* NAME (SIGN UP ONLY) */}
+        {currentState === "Sign Up" && (
           <input
-            type="password"
-            placeholder="Enter Password"
-            className="outline-none border border-[#c9c9c9]
-            p-2.5 rounded-xl"
-            name="password"
+            type="text"
+            name="name"
+            placeholder="Your name"
+            value={data.name}
             onChange={onChangeHandeler}
-            value={data.password}
+            className="p-3 rounded-xl bg-[#1a1a1a] border border-neutral-800 outline-none text-sm"
             required
           />
+        )}
+
+        {/* EMAIL */}
+        <input
+          type="email"
+          name="email"
+          placeholder="Your email"
+          value={data.email}
+          onChange={onChangeHandeler}
+          className="p-3 rounded-xl bg-[#1a1a1a] border border-neutral-800 outline-none text-sm"
+          required
+        />
+
+        {/* PASSWORD */}
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={data.password}
+          onChange={onChangeHandeler}
+          className="p-3 rounded-xl bg-[#1a1a1a] border border-neutral-800 outline-none text-sm"
+          required
+        />
+
+        {/* TERMS */}
+        <div className="flex items-start gap-2 text-xs text-gray-500">
+          <input type="checkbox" required className="mt-1" />
+          <p>By continuing, you agree to our terms & privacy policy.</p>
         </div>
+
+        {/* BUTTON */}
         <button
           type="submit"
-          className="p-2.5 rounded-xl text-white bg-amber-400 hover:bg-amber-500 font-bold text-[15px] cursor-pointer "
+          disabled={loading}
+          className="p-3 rounded-xl bg-amber-400 hover:bg-amber-500 text-black font-bold text-sm transition disabled:opacity-50"
         >
-          {currentState === "Sign Up" ? "Create account" : "Login"}
+          {loading
+            ? "Please wait..."
+            : currentState === "Login"
+              ? "Login"
+              : "Create account"}
         </button>
-        {/* popup condition */}
-        <div className="flex items-start gap-2 -mt-2">
-          <input type="checkbox" className="mt-1" required />
-          <p>by continuing, I agree to the terms of use & provacy policy</p>
-        </div>
-        {/* change between Login and Sign up */}
-        {currentState === "Login" ? (
-          <p className="text-center">
-            Create new account?{" "}
-            <span
-              className="text-amber-400 font-semibold cursor-pointer"
-              onClick={() => setCurrentState("Sign Up")}
-            >
-              Click here
-            </span>
-          </p>
-        ) : (
-          <p className="text-center">
-            Already have an account?{" "}
-            <span
-              className="text-amber-400 font-semibold cursor-pointer"
-              onClick={() => setCurrentState("Login")}
-            >
-              Login here
-            </span>
-          </p>
-        )}
+
+        {/* SWITCH */}
+        <p className="text-center text-sm text-gray-400">
+          {currentState === "Login" ? (
+            <>
+              New here?{" "}
+              <span
+                className="text-amber-400 cursor-pointer"
+                onClick={() => setCurrentState("Sign Up")}
+              >
+                Create account
+              </span>
+            </>
+          ) : (
+            <>
+              Already have an account?{" "}
+              <span
+                className="text-amber-400 cursor-pointer"
+                onClick={() => setCurrentState("Login")}
+              >
+                Login
+              </span>
+            </>
+          )}
+        </p>
       </form>
     </div>
   );

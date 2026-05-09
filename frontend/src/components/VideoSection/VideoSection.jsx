@@ -1,39 +1,48 @@
 import React from "react";
 import { FaPlayCircle } from "react-icons/fa";
 import { ReactTyped } from "react-typed";
-
 import { mainImgObject } from "../../assets/assets.js";
 
 const VideoSection = () => {
   return (
-    <div className="h-[60vh] md:h-[60vh] w-[100%] mx-auto bg-black my-6 relative">
+    <div className="h-[40vh] md:h-[60vh] w-full mx-auto bg-black my-6 relative overflow-hidden">
+      {/* VIDEO */}
       <video
         autoPlay
         loop
         muted
         id="video"
-        className="w-[100%] h-[60vh] mt-20 md:h-[60vh] object-cover"
+        className="w-full h-full object-cover"
       >
         <source src={mainImgObject.home_video} type="video/mp4" />
       </video>
-      <div className="absolute w-[100%] h-[100%] bg-gradient-to-l from-black/20 to-black top-0 left-0 flex flex-col justify-center items-start text-white pl-7">
-        <div className="text-left bg-re border-2 border-amber-300 p-10">
-          <h1 className=" text-[40px] md:text-[70px] mb-3">
+
+      {/* OVERLAY */}
+      <div className="absolute inset-0 bg-gradient-to-l from-black/40 to-black flex flex-col justify-center items-start text-white px-4 sm:pl-7">
+        <div className="text-center md:text-left border-2 border-amber-300 p-4 sm:p-10 w-full sm:w-auto">
+          <h1 className="text-[28px] sm:text-[40px] md:text-[70px] mb-3 leading-tight">
             Dining
-            <span className="text-amber-300 ml-4 font-bold">
+            <span className="text-amber-300 ml-2 sm:ml-4 font-bold">
               <ReactTyped
                 strings={["Experiences", "Flavors", "Moments"]}
-                typeSpeed={490}
+                typeSpeed={120}
+                backSpeed={60}
                 loop
               />
             </span>
           </h1>
-          <p className="w-[90%] tracking-[1px] text-white/40 leading-6 md:w-[650px]">
+
+          <p className="hidden sm:block w-full sm:w-[650px] tracking-[1px] text-white/60 leading-6 text-sm sm:text-base">
             Indulge in exceptional cuisine crafted from the finest ingredients.
             Our restaurant brings together global flavors and innovative dishes
             to create unforgettable dining experiences for every guest. Savor
             every bite and make every visit a celebration of taste and
             sophistication.
+          </p>
+
+          <p className="sm:hidden w-full tracking-[1px] text-white/60 leading-6 text-sm sm:text-base">
+            Fine dining with the best ingredients, global flavors, and creative
+            dishes
           </p>
         </div>
       </div>

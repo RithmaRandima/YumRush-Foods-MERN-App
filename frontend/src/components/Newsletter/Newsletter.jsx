@@ -64,12 +64,19 @@ const Newsletter = () => {
       </div>
       {/* middle */}
       <div className=" flex ">
-        <div className="flex-2 px-5 pr-15 h-120">
+        <div className="relative flex-2 px-5 pr-15 h-120">
           <img
             src={mainImgObject.newsletterBg}
             alt=""
             className="h-full w-full object-cover"
           />
+          <div className="absolute -bottom-30 bg-[#0f0f0f] h-[360px] w-[290px] pt-4 pr-4 -left-5">
+            <img
+              src={mainImgObject.newsletterBg}
+              alt=""
+              className="h-full w-full object-cover"
+            />
+          </div>
         </div>
 
         <div className=" flex-1">
