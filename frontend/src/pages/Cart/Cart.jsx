@@ -9,52 +9,45 @@ const Cart = () => {
   const { cartItems, addToCart, removeFromCart, food_list, url, loading } =
     useContext(StoreContext);
 
-  // check if cart has items
   const hasCartItems = Object.values(cartItems || {}).some((qty) => qty > 0);
 
-  // show loading while fetching data
   if (loading) {
     return (
-      <div className="text-white text-center text-2xl mt-10">
+      <div className="text-white text-center text-xl sm:text-2xl mt-10">
         Loading Cart...
       </div>
     );
   }
 
-  // show empty cart only after loading completed
   if (!hasCartItems) {
     return <EmptyCart />;
   }
 
   return (
-    <div className="cart flex items-start gap-5 p-4">
-      {/* cart item section */}
+    <div
+      className="
+        flex flex-col lg:flex-row
+        gap-6
+        p-3 sm:p-4 lg:p-6
+        min-h-screen
+      "
+    >
+      {/* LEFT */}
       <div className="w-full">
-        <h1 className="text-white my-6 font-extrabold tracking-[2px] text-[30px]">
+        {/* TITLE */}
+        <h1 className="text-white my-4 sm:my-6 font-semibold tracking-[2px] text-2xl sm:text-3xl">
           My Cart
         </h1>
 
-        <div className="cart-items">
-          <div className="cart-items-title grid grid-cols-[1fr_1.5fr_1fr_1fr_1fr_0.5fr] gap-[1px] text-amber-300 text-[14px]">
-            <p>Items</p>
-            <p>Title</p>
-            <p>Price</p>
-            <p>Quantity</p>
-            <p>Total</p>
-            <p></p>
-          </div>
-
-          <br />
-          <hr />
-
+        {/* ITEMS */}
+        <div className="space-y-3">
           {food_list &&
-            food_list.map((item, index) => {
+            food_list.map((item) => {
               if (cartItems[item._id] > 0) {
                 return (
                   <CartListRowItem
                     key={item._id}
                     item={item}
-                    index={index}
                     url={url}
                     cartItems={cartItems}
                     addToCart={addToCart}
@@ -62,15 +55,22 @@ const Cart = () => {
                   />
                 );
               }
-
               return null;
             })}
         </div>
       </div>
 
-      {/* cart Total section */}
-      <div className="bg-gray-900/30 rounded-2xl top-0 p-6">
-        <CartTotalSection />
+      {/* RIGHT */}
+      <div
+        className="
+          w-full lg:w-[350px]
+          lg:sticky lg:top-6
+          h-fit
+        "
+      >
+        <div className="bg-[#141414] border border-[#242424] rounded-2xl p-5">
+          <CartTotalSection />
+        </div>
       </div>
     </div>
   );
