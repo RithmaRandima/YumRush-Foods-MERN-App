@@ -27,6 +27,10 @@ body {
   overflow-x: hidden;
 }
 
+button {
+  cursor: pointer;
+}
+
 a {
   text-decoration: none;
   color: inherit;

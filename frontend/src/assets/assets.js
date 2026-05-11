@@ -33,6 +33,11 @@ import item_card_6 from "./pure-veg-item.jpg";
 import item_card_7 from "./pasta-item.jpg";
 import item_card_8 from "./noodles-item.jpg";
 
+import smallRestaurant from "./restaurant-small.jpg";
+import bigRestaurant from "./restaurant-big.jpg";
+import phe from "./phe.jpg";
+import chef from "./chef.jpg";
+
 import home_video from "./home_video.mp4";
 
 export const mainImgObject = {
@@ -50,6 +55,10 @@ export const mainImgObject = {
   about_1,
   about_2,
   about_3,
+  smallRestaurant,
+  bigRestaurant,
+  phe,
+  chef,
 };
 
 export const menu_list = [

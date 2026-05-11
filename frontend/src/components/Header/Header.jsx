@@ -2,8 +2,10 @@ import React from "react";
 import "./Header.css";
 import { Background, Parallax } from "react-parallax";
 import { mainImgObject } from "../../assets/assets";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <div className="relative h-[80vh] md:h-[90vh] overflow-hidden">
       <Parallax
@@ -28,16 +30,18 @@ const Header = () => {
           Indulge in Culinary Excellence
         </p>
 
-        <h2 className="font-extrabold text-center text-[48px] sm:text-[70px] md:text-[120px] text-amber-300 leading-none">
+        <h2 className="font-extrabold text-center text-[63px] sm:text-[70px] md:text-[120px] text-amber-300 leading-none">
           The Food Heaven
         </h2>
 
-        <p className="text-white text-[14px] sm:text-[16px] md:text-[19px] w-full md:w-[600px] sm:-mt-4 mb-6 sm:mb-10">
+        <p className="text-white text-[14px] sm:text-[16px] md:text-[19px] w-full md:w-[600px] sm:-mt-4 mb-3 sm:mb-10">
           we have propper passion for coocking. Love is the secret ingredient
           that makes all aou meals taste better and magical
         </p>
 
-        <button className="btn">View Menu</button>
+        <button className="btn" onClick={() => navigate("/menu")}>
+          View Menu
+        </button>
       </div>
     </div>
   );

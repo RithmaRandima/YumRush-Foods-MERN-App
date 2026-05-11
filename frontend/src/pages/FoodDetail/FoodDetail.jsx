@@ -45,6 +45,10 @@ const FoodDetail = () => {
     fetchItem();
   }, [id, url]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleAddComment = () => {
     if (!commentText.trim()) return;
 
